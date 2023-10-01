@@ -1,5 +1,5 @@
 import type { WebviewApi } from "vscode-webview";
-import type { MessageType } from "@/interface";
+import type { BoardType, MessageType } from "@/interface";
 
 class VSCodeAPIWrapper {
   private readonly vsCodeApi: WebviewApi<unknown> | undefined;
@@ -10,15 +10,7 @@ class VSCodeAPIWrapper {
     }
   }
 
-  /**
-   * Post a message (i.e. send arbitrary data) to the owner of the webview.
-   *
-   * @remarks When running webview code inside a web browser, postMessage will instead
-   * log the given message to the console.
-   *
-   * @param message Abitrary data (must be JSON serializable) to send to the extension context.
-   */
-  public postMessage(message: MessageType<unknown>) {
+  public postMessage(message: MessageType) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage(message);
     } else {
@@ -34,13 +26,13 @@ class VSCodeAPIWrapper {
    *
    * @return The current state or `undefined` if no state has been set.
    */
-  public async getState<T>(): Promise<T> {
+  public async getState(): Promise<BoardType> {
     if (this.vsCodeApi) {
       this.postMessage({ action: "load" });
       return new Promise((res) => {
-        const onMessageReceive = ({ data: message }: MessageEvent<MessageType<T>>) => {
+        const onMessageReceive = ({ data: message }: MessageEvent<MessageType>) => {
           window.removeEventListener("message", onMessageReceive);
-          if (message.action === "load") res(message.data as T);
+          if (message.action === "load") res(message.data as BoardType);
         };
         window.addEventListener("message", onMessageReceive);
       });
@@ -61,7 +53,7 @@ class VSCodeAPIWrapper {
    *
    * @return The new state.
    */
-  public setState<T extends unknown | undefined>(newState: T) {
+  public setState(newState: BoardType) {
     if (this.vsCodeApi) {
       this.postMessage({ action: "save", data: newState });
     } else {

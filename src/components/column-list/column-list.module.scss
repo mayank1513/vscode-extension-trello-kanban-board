@@ -1,0 +1,15 @@
+.columnList {
+  padding: 10px;
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  flex-grow: 1;
+  width: 100vw;
+  overflow-x: auto;
+}
+.column {
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 1px #555;
+}

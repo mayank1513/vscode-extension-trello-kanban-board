@@ -1,31 +1,33 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { createContext, useContext, useEffect, useState } from "react";
+import "./App.scss";
 import { vscode } from "utils/vscode";
+import { BoardType } from "@/interface";
+import { defaultBoard } from "utils/data";
+import Board from "components/board";
 
+interface ContextType {
+  state: BoardType;
+  setState: (state: BoardType) => void;
+}
+
+const GlobalContext = createContext<ContextType>({} as ContextType);
+
+export const useGlobalState = () => useContext(GlobalContext);
 function App() {
-  const [count, _setCount] = useState(0);
-  const setCount = (count: number) => {
-    _setCount(count);
-    vscode.setState(count);
+  const [state, _setState] = useState<BoardType>(defaultBoard);
+  const setState = (state: BoardType) => {
+    _setState(state);
+    vscode.setState(state);
   };
 
   useEffect(() => {
-    vscode.getState().then((count) => {
-      _setCount((count || 0) as number);
-    });
+    vscode.getState().then((state) => _setState(state || defaultBoard));
   }, []);
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <GlobalContext.Provider value={{ state, setState }}>
+      <Board />
+    </GlobalContext.Provider>
   );
 }
 
