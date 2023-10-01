@@ -2,10 +2,9 @@ import fs from "fs";
 import path from "path";
 
 const packageJSON = {
-  name: "trello-kanban",
+  name: "trello-kanban-task-board",
   displayName: "Trello like kanban board",
-  description:
-    "Simple trello like kanban board for VS Code. Visually organize your ideas!",
+  description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
   version: "0.0.1",
   publisher: "mayank1513",
   icon: "",
@@ -21,7 +20,4 @@ const packageJSON = {
   },
 };
 
-fs.writeFileSync(
-  path.resolve(process.cwd(), "dist", "package.json"),
-  JSON.stringify(packageJSON, null, 2)
-);
+fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));
