@@ -6,6 +6,9 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": "src",
+    "paths": {
+      "@/interface": ["../extension/interface"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

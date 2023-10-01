@@ -1,26 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Disposable, ExtensionContext, Uri, ViewColumn, WebviewPanel, window } from "vscode";
 import { createId } from "@paralleldrive/cuid2";
+import { ScopeType, prefix } from "./constants";
+import { MessageType } from "./interface";
 
 export class Panel {
   private _panel: WebviewPanel;
-  private _disposables: Disposable[] = [];
+  private _scope: ScopeType;
   private _context: ExtensionContext;
-  private constructor(panel: WebviewPanel, context: ExtensionContext) {
+  private _disposables: Disposable[] = [];
+  private constructor(panel: WebviewPanel, context: ExtensionContext, scope: ScopeType) {
     this._panel = panel;
+    this._scope = scope;
     this._context = context;
     this._setupWebView();
   }
-  public static render(context: ExtensionContext) {
-    const panel = window.createWebviewPanel("TrelloKanban", "TrelloKanban", ViewColumn.One, {
+  public static render(context: ExtensionContext, scope: ScopeType) {
+    const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
       enableScripts: true,
     });
-    new Panel(panel, context);
+    new Panel(panel, context, scope);
   }
 
   private _setupWebView() {
     const nonce = createId();
-    const { extensionUri } = this._context;
+    const { extensionUri, globalState, workspaceState } = this._context;
     const { webview } = this._panel;
     const cssUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.css"));
     const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
@@ -52,6 +56,34 @@ export class Panel {
         }
       },
       null,
+      this._disposables
+    );
+
+    // message listeners
+    const momento = this._scope === "Global" ? globalState : workspaceState;
+    const key = prefix;
+    webview.onDidReceiveMessage(
+      (message: MessageType<unknown>) => {
+        const { action, data, text } = message;
+        switch (action) {
+          case "load":
+            webview.postMessage({ action: "load", data: momento.get(key) } as MessageType<unknown>);
+            break;
+          case "save":
+            momento.update(key, data);
+            break;
+          case "info":
+            window.showInformationMessage(text || "");
+            break;
+          case "warn":
+            window.showWarningMessage(text || "");
+            break;
+          case "error":
+            window.showErrorMessage(text || "");
+            break;
+        }
+      },
+      undefined,
       this._disposables
     );
   }
