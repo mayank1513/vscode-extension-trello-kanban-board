@@ -1,5 +1,8 @@
 import fs from "fs";
 import path from "path";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore -- ts-node expects .ts extension
+import { prefix, scopes } from "./extension/constants.ts";
 
 const packageJSON = {
   name: "trello-kanban-task-board",
@@ -13,7 +16,10 @@ const packageJSON = {
   },
   main: "./index.js",
   contributes: {
-    commands: [{ command: "test", title: "Kanban: Test" }],
+    commands: scopes.map((scope) => ({
+      command: prefix + scope,
+      title: "TrelloKanban: " + scope,
+    })),
   },
   sponsor: {
     url: "https://github.com/sponsors/mayank1513",
