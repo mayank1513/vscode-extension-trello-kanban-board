@@ -70,11 +70,11 @@ export class Panel {
     const momento = this._scope === "Global" ? globalState : workspaceState;
     const key = prefix;
     webview.onDidReceiveMessage(
-      (message: MessageType<unknown>) => {
+      (message: MessageType) => {
         const { action, data, text } = message;
         switch (action) {
           case "load":
-            webview.postMessage({ action: "load", data: momento.get(key) } as MessageType<unknown>);
+            webview.postMessage({ action: "load", data: momento.get(key) } as MessageType);
             break;
           case "save":
             momento.update(key, data);
