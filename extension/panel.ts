@@ -5,6 +5,7 @@ import { ScopeType, prefix } from "./constants";
 import { MessageType } from "./interface";
 
 export class Panel {
+  public static Panels: Record<ScopeType, Panel | undefined> = { Global: undefined, Workspace: undefined };
   private _panel: WebviewPanel;
   private _scope: ScopeType;
   private _context: ExtensionContext;
@@ -16,10 +17,14 @@ export class Panel {
     this._setupWebView();
   }
   public static render(context: ExtensionContext, scope: ScopeType) {
-    const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
-      enableScripts: true,
-    });
-    new Panel(panel, context, scope);
+    if (this.Panels[scope]) {
+      this.Panels[scope]?._panel.reveal(ViewColumn.One);
+    } else {
+      const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
+        enableScripts: true,
+      });
+      this.Panels[scope] = new Panel(panel, context, scope);
+    }
   }
 
   private _setupWebView() {
