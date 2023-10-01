@@ -20,5 +20,5 @@ export interface ColumnType {
 export interface BoardType {
   theme?: string;
   columns: ColumnType[];
-  tasks: TaskType[];
+  tasks: { [key: string]: TaskType };
 }

@@ -5,7 +5,7 @@ import { ColumnType } from "@/interface";
 
 export default function ColumnList({ columns }: { columns: ColumnType[] }) {
   return (
-    <Droppable droppableId={"columns"} direction="horizontal">
+    <Droppable droppableId={"columns"} direction="horizontal" type="column">
       {(provided) => (
         <div ref={provided.innerRef} {...provided.droppableProps} className={styles.columnList}>
           {columns.map((column, index) => (

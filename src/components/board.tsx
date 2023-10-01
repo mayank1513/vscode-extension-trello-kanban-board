@@ -16,11 +16,25 @@ export default function Board() {
       return;
     }
 
+    /** column id always starts with "column-" */
+    const columns = state.columns;
     if (draggableId.startsWith("column-")) {
-      const columns = state.columns;
       const column = columns.splice(source.index, 1)[0];
       columns.splice(destination.index, 0, column);
       setState({ ...state, columns: [...state.columns] });
+    } else {
+      const sourceCol = columns.find((c) => c.id === source.droppableId);
+      let destinationCol;
+      if (destination.droppableId === "columns") {
+        destinationCol = columns[Math.min(destination.index, columns.length - 1)];
+      } else {
+        destinationCol = columns.find((c) => c.id === destination.droppableId);
+      }
+      const task = sourceCol?.tasksIds.splice(source.index, 1)[0];
+      if (task) {
+        destinationCol?.tasksIds.splice(destination.index, 0, task);
+        setState({ ...state, columns: [...state.columns] });
+      }
     }
   };
   return (

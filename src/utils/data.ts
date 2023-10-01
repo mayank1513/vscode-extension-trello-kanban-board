@@ -1,14 +1,14 @@
 import { BoardType } from "@/interface";
 import { createId } from "@paralleldrive/cuid2";
 
-const taskId = createId();
+const taskId = "task-" + createId();
 export const defaultBoard: BoardType = {
-  tasks: [
-    {
+  tasks: {
+    [taskId]: {
       id: taskId,
       description: "Move me to another column",
     },
-  ],
+  },
   columns: [
     {
       id: "column-todo",
