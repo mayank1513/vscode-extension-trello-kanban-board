@@ -5,6 +5,7 @@ import { ScopeType, prefix } from "./constants";
 import { MessageType } from "./interface";
 
 export class Panel {
+  public static Panels: Record<ScopeType, Panel | undefined> = { Global: undefined, Workspace: undefined };
   private _panel: WebviewPanel;
   private _scope: ScopeType;
   private _context: ExtensionContext;
@@ -16,10 +17,14 @@ export class Panel {
     this._setupWebView();
   }
   public static render(context: ExtensionContext, scope: ScopeType) {
-    const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
-      enableScripts: true,
-    });
-    new Panel(panel, context, scope);
+    if (this.Panels[scope]) {
+      this.Panels[scope]?._panel.reveal(ViewColumn.One);
+    } else {
+      const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
+        enableScripts: true,
+      });
+      this.Panels[scope] = new Panel(panel, context, scope);
+    }
   }
 
   private _setupWebView() {
@@ -28,6 +33,7 @@ export class Panel {
     const { webview } = this._panel;
     const cssUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.css"));
     const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
+    const iconUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "logo.png"));
 
     webview.html = `
     <!DOCTYPE html>
@@ -35,6 +41,7 @@ export class Panel {
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <link rel="icon" type="image/*" href="${iconUri}" nonce="${nonce}"/>
           <link rel="stylesheet" type="text/css" href="${cssUri}">
         </head>
         <body>

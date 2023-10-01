@@ -10,7 +10,7 @@ const packageJSON = {
   description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
   version: "0.0.1",
   publisher: "mayank1513",
-  icon: "",
+  icon: "logo.png",
   engines: {
     vscode: "^1.75.0",
   },
