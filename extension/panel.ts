@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Disposable, ExtensionContext, Uri, ViewColumn, WebviewPanel, window } from "vscode";
+import { createId } from "@paralleldrive/cuid2";
 
 export class Panel {
   private _panel: WebviewPanel;
@@ -18,16 +19,23 @@ export class Panel {
   }
 
   private _setupWebView() {
+    const nonce = createId();
+    const { extensionUri } = this._context;
     const { webview } = this._panel;
+    const cssUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.css"));
+    const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
 
     webview.html = `
     <!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <link rel="stylesheet" type="text/css" href="${cssUri}">
         </head>
         <body>
           <div id="root">Hare Krishna!</div>
+          <script type="module" nonce="${nonce}" src="${jsUri}"></script>
         </body>
       </html>`;
 
