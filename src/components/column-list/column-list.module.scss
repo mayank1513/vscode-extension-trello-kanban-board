@@ -1,15 +1,32 @@
 .columnList {
-  padding: 10px;
   display: flex;
   align-items: start;
-  gap: 20px;
   flex-grow: 1;
-  width: 100vw;
   overflow-x: auto;
+  overflow-y: hidden;
+}
+.columnContainer {
+  height: 100%;
+}
+.columnDropzone {
+  padding: 10px;
+  height: 100%;
 }
 .column {
   min-width: 300px;
+  max-width: 300px;
+  max-height: 100%;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 1px #555;
+}
+.addTask {
+  margin: 5px;
+  width: calc(100% - 10px);
+}
+
+.taskList {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100vh - 180px);
 }

@@ -1,4 +1,4 @@
-import { useGlobalState } from "App";
+import { useGlobalState } from "utils/context";
 import styles from "./board.module.scss";
 import ColumnList from "./column-list";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
@@ -40,6 +40,10 @@ export default function Board() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
+        <header className={styles.header}>
+          <h1>Trello Kanban Board</h1>
+          <hr />
+        </header>
         <ColumnList columns={state.columns} />
       </div>
     </DragDropContext>
