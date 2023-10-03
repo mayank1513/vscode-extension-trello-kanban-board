@@ -11,10 +11,13 @@
 
 .header {
   padding: 0 20px;
-  background: #fff3;
   backdrop-filter: blur(3px);
   z-index: 100;
   text-align: center;
+  h1 {
+    font-size: 1.5em;
+    margin: 10px;
+  }
 }
 
 .theme1 {
@@ -23,10 +26,4 @@
 
 .theme2 {
   background: linear-gradient(-45deg, orange, red);
-}
-
-.dark {
-  .header {
-    background: #0003;
-  }
 }

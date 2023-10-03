@@ -1,4 +1,4 @@
-import { useGlobalState } from "App";
+import { useGlobalState } from "utils/context";
 import styles from "./board.module.scss";
 import ColumnList from "./column-list";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";

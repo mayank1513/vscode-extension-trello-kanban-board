@@ -2,7 +2,7 @@ import { ColumnType } from "@/interface";
 import styles from "./column-list.module.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "components/task";
-import { useGlobalState } from "App";
+import { useGlobalState } from "utils/context";
 
 export default function Column({ column, index }: { column: ColumnType; index: number }) {
   const { state } = useGlobalState();
