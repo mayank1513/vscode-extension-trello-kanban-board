@@ -15,6 +15,14 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
     setState({ ...state, columns: [...state.columns] });
     setIsEditing(false);
   };
+  const removeColumn = () => {
+    // todo: confirm before delete or show info message with undo button
+    const tasks = state.tasks;
+    column.tasksIds.forEach((tid) => {
+      delete tasks[tid];
+    });
+    setState({ ...state, columns: state.columns.filter((c) => c !== column), tasks });
+  };
   return (
     <header {...rest} className={styles.header}>
       <label htmlFor={id} onClick={() => setIsEditing(true)}>
@@ -29,7 +37,9 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
         />
         <div hidden={isEditing} className={styles.headerContent}>
           {column.title || <span className={styles.placeholder}>Add column title</span>}{" "}
-          <span className={styles.close}>✖</span>
+          <span className={styles.close} onClick={removeColumn}>
+            ✖
+          </span>
         </div>
       </label>
     </header>

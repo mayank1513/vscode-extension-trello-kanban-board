@@ -1,5 +1,6 @@
 import type { WebviewApi } from "vscode-webview";
 import type { BoardType, MessageType } from "@/interface";
+import { defaultBoard } from "./data";
 
 class VSCodeAPIWrapper {
   private readonly vsCodeApi: WebviewApi<unknown> | undefined;
@@ -32,13 +33,15 @@ class VSCodeAPIWrapper {
       return new Promise((res) => {
         const onMessageReceive = ({ data: message }: MessageEvent<MessageType>) => {
           window.removeEventListener("message", onMessageReceive);
-          if (message.action === "load") res(message.data as BoardType);
+          if (message.action === "load") {
+            res((message.data?.columns ? message.data : { ...defaultBoard, ...message.data }) as BoardType);
+          }
         };
         window.addEventListener("message", onMessageReceive);
       });
     } else {
       const state = localStorage.getItem("vscodeState");
-      return state ? JSON.parse(state) : null;
+      return state ? JSON.parse(state) : { ...defaultBoard, scope: "Browser" };
     }
   }
 

@@ -7,6 +7,7 @@ export interface MessageType {
 export interface TaskType {
   id: string;
   description: string;
+  columnId: string;
 }
 
 export interface ColumnType {
@@ -21,4 +22,5 @@ export interface BoardType {
   theme?: string;
   columns: ColumnType[];
   tasks: { [key: string]: TaskType };
+  scope: string;
 }
