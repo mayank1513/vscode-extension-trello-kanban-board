@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import "./App.scss";
 import { vscode } from "utils/vscode";
 import { BoardType } from "@/interface";
 import { defaultBoard } from "utils/data";
@@ -13,6 +12,7 @@ interface ContextType {
 const GlobalContext = createContext<ContextType>({} as ContextType);
 
 export const useGlobalState = () => useContext(GlobalContext);
+
 function App() {
   const [state, _setState] = useState<BoardType>(defaultBoard);
   const setState = (state: BoardType) => {

@@ -4,6 +4,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   background: var(--bg);
   color: var(--text-color);
 }
@@ -13,6 +14,7 @@
   background: #fff3;
   backdrop-filter: blur(3px);
   z-index: 100;
+  text-align: center;
 }
 
 .theme1 {
@@ -26,23 +28,5 @@
 .dark {
   .header {
     background: #0003;
-  }
-}
-
-.empty {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  text-align: center;
-  h1 {
-    opacity: 0.3;
-  }
-  button {
-    cursor: pointer;
-    padding: 10px;
-    width: 150px;
-    margin: 20px;
   }
 }
