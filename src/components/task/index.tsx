@@ -49,7 +49,12 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             placeholder="Enter task description in Markdown format"
             hidden={!isEditing}
           />
-          {!isEditing && <ReactMarkdown>{task.description}</ReactMarkdown>}
+          {!isEditing &&
+            (task.description.trim() ? (
+              <ReactMarkdown>{task.description}</ReactMarkdown>
+            ) : (
+              <p className={styles.placeholder}>Enter task description in Markdown format.</p>
+            ))}
         </label>
       )}
     </Draggable>
