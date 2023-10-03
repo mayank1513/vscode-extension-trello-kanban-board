@@ -21,7 +21,6 @@
   box-shadow: 0 0 1px #555;
 }
 .header {
-  cursor: grab;
   input {
     font-family: inherit;
     font-size: inherit;
@@ -34,6 +33,7 @@
   }
 }
 .headerContent {
+  cursor: grab;
   display: flex;
   padding: 0 5px;
   justify-content: space-between;
