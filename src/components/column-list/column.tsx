@@ -4,6 +4,7 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "components/task";
 import { useGlobalState } from "utils/context";
 import { createId } from "@paralleldrive/cuid2";
+import ColumnHeader from "./column-header";
 
 export default function Column({ column, index }: { column: ColumnType; index: number }) {
   const { state, setState } = useGlobalState();
@@ -23,7 +24,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
                 <div className={styles.column}>
-                  <header {...provided.dragHandleProps}>{column.title}</header>
+                  <ColumnHeader {...provided.dragHandleProps} column={column} />
                   <hr />
                   <div className={styles.taskList}>
                     {column.tasksIds.map((taskId, index) => (

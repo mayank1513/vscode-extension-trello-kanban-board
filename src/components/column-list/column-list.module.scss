@@ -20,13 +20,46 @@
   border-radius: 10px;
   box-shadow: 0 0 1px #555;
 }
+.header {
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+  &:hover .close {
+    display: inline-block;
+  }
+}
+.headerContent {
+  display: flex;
+  padding: 0 5px;
+  justify-content: space-between;
+}
+.placeholder {
+  opacity: 0.5;
+}
 .addTask {
   margin: 5px;
   width: calc(100% - 10px);
+  cursor: pointer;
 }
-
+.addColumn {
+  margin: 10px;
+  padding: 5px;
+  width: 120px;
+  cursor: pointer;
+}
 .taskList {
   overflow-x: hidden;
   overflow-y: auto;
   max-height: calc(100vh - 180px);
+}
+.close {
+  display: none;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
 }
