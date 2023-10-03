@@ -1,0 +1,22 @@
+.task {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  display: block;
+  textarea {
+    width: calc(100% - 10px);
+    outline: none;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  * {
+    margin: 2px 0;
+  }
+  ul {
+    padding-left: 20px;
+  }
+}
