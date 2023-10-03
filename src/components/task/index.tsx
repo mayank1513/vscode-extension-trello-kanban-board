@@ -14,7 +14,6 @@ export default function Task({ task, index }: { task: TaskType; index: number })
   const onBlur = () => {
     task.description = text.replace(/ +/, " ").replace(/\n+/g, "\n\n");
     setText(task.description);
-    console.log("dec - ", task.description);
     setState({ ...state, tasks: { ...state.tasks } });
     setIsEditing(false);
   };

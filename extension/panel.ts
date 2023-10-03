@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Disposable, ExtensionContext, Uri, ViewColumn, WebviewPanel, window } from "vscode";
-import { createId } from "@paralleldrive/cuid2";
 import { ScopeType, prefix } from "./constants";
 import { MessageType } from "./interface";
 
@@ -28,25 +26,27 @@ export class Panel {
   }
 
   private _setupWebView() {
-    const nonce = createId();
     const { extensionUri, globalState, workspaceState } = this._context;
     const { webview } = this._panel;
     const cssUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.css"));
     const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
     const iconUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "logo.png"));
 
+    console.log("cspSource -- ", webview.cspSource, "--done");
+
     webview.html = `
     <!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
-          <link rel="icon" type="image/*" href="${iconUri}" nonce="${nonce}"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src ${webview.cspSource}; img-src ${webview.cspSource} data: https:;">
+          <link rel="icon" type="image/*" href="${iconUri}" />
           <link rel="stylesheet" type="text/css" href="${cssUri}">
         </head>
         <body>
           <div id="root">Hare Krishna!</div>
-          <script type="module" nonce="${nonce}" src="${jsUri}"></script>
+          <script type="module" src="${jsUri}"></script>
         </body>
       </html>`;
 
@@ -77,7 +77,7 @@ export class Panel {
           case "load":
             {
               const data = momento.get(key) || { scope };
-              webview.postMessage({ action: "load", data } as MessageType);
+              webview.postMessage({ action: "load", data: { ...data } } as MessageType);
             }
             break;
           case "save":

@@ -2,6 +2,7 @@ import { ColumnType } from "@/interface";
 import { HTMLProps, useId, useState } from "react";
 import styles from "./column-list.module.scss";
 import { useGlobalState } from "utils/context";
+import { vscode } from "utils/vscode";
 
 export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: ColumnType }) {
   const { state, setState } = useGlobalState();
@@ -22,6 +23,7 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
       delete tasks[tid];
     });
     setState({ ...state, columns: state.columns.filter((c) => c !== column), tasks });
+    vscode.postMessage({ action: "warn", text: `${column.title} column and ${column.tasksIds.length} tasks deleted!` });
   };
   return (
     <header {...rest} className={styles.header}>
