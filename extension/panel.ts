@@ -67,14 +67,18 @@ export class Panel {
     );
 
     // message listeners
-    const momento = this._scope === "Global" ? globalState : workspaceState;
+    const scope = this._scope;
+    const momento = scope === "Global" ? globalState : workspaceState;
     const key = prefix;
     webview.onDidReceiveMessage(
       (message: MessageType) => {
         const { action, data, text } = message;
         switch (action) {
           case "load":
-            webview.postMessage({ action: "load", data: momento.get(key) } as MessageType);
+            {
+              const data = momento.get(key) || { scope };
+              webview.postMessage({ action: "load", data } as MessageType);
+            }
             break;
           case "save":
             momento.update(key, data);

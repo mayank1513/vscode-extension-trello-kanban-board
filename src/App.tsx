@@ -13,7 +13,7 @@ function App() {
   };
 
   useEffect(() => {
-    vscode.getState().then((state) => _setState(state || defaultBoard));
+    vscode.getState().then((state) => _setState(state));
   }, []);
 
   return (

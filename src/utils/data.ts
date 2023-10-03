@@ -3,10 +3,12 @@ import { createId } from "@paralleldrive/cuid2";
 
 const taskId = "task-" + createId();
 export const defaultBoard: BoardType = {
+  scope: "",
   tasks: {
     [taskId]: {
       id: taskId,
       description: "Move me to another column",
+      columnId: "column-todo",
     },
   },
   columns: [

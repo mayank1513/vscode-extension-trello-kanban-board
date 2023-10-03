@@ -12,6 +12,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
     const newTask: TaskType = {
       id: createId(),
       description: "",
+      columnId: column.id,
     };
     column.tasksIds = [...column.tasksIds, newTask.id];
     setState({ ...state, tasks: { ...state.tasks, [newTask.id]: newTask }, columns: [...state.columns] });
@@ -27,8 +28,11 @@ export default function Column({ column, index }: { column: ColumnType; index: n
                   <ColumnHeader {...provided.dragHandleProps} column={column} />
                   <hr />
                   <div className={styles.taskList}>
+                    {/* <Draggable draggableId={column.id + "-empty"} index={0}>
+                      {() => <></>}
+                    </Draggable> */}
                     {column.tasksIds.map((taskId, index) => (
-                      <Task key={column.id} task={state.tasks[taskId]} index={index} />
+                      <Task key={taskId} task={state.tasks[taskId]} index={index} />
                     ))}
                     {provided1.placeholder}
                   </div>

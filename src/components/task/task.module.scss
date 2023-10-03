@@ -4,6 +4,7 @@
   border-radius: 5px;
   border: 1px solid gray;
   display: block;
+  position: relative;
   textarea {
     width: calc(100% - 10px);
     outline: none;
@@ -19,7 +20,21 @@
   ul {
     padding-left: 20px;
   }
+  &:hover .close {
+    display: block;
+  }
 }
 .placeholder {
   opacity: 0.5;
+}
+.close {
+  position: absolute;
+  right: 5px;
+  top: -5px;
+  display: none;
+  cursor: pointer;
+  z-index: 100;
+  &:hover {
+    color: red;
+  }
 }

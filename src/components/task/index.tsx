@@ -24,6 +24,16 @@ export default function Task({ task, index }: { task: TaskType; index: number })
     target.style.height = "auto";
     target.style.height = `${target.scrollHeight}px`;
   };
+  const removeTask = () => {
+    const tasks = { ...state.tasks };
+    delete tasks[task.id];
+    const columns = [...state.columns];
+    const column = columns.find((c) => c.id === task.columnId);
+    if (column) {
+      column.tasksIds = column.tasksIds.filter((id) => id !== task.id);
+    }
+    setState({ ...state, tasks, columns });
+  };
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -49,6 +59,9 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             placeholder="Enter task description in Markdown format"
             hidden={!isEditing}
           />
+          <span className={styles.close} onClick={removeTask}>
+            ✖
+          </span>
           {!isEditing &&
             (task.description.trim() ? (
               <ReactMarkdown>{task.description}</ReactMarkdown>

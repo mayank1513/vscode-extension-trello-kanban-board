@@ -23,6 +23,7 @@ export default function Board() {
       columns.splice(destination.index, 0, column);
       setState({ ...state, columns: [...state.columns] });
     } else {
+      const columns = [...state.columns];
       const sourceCol = columns.find((c) => c.id === source.droppableId);
       let destinationCol;
       if (destination.droppableId === "columns") {
@@ -30,10 +31,12 @@ export default function Board() {
       } else {
         destinationCol = columns.find((c) => c.id === destination.droppableId);
       }
-      const task = sourceCol?.tasksIds.splice(source.index, 1)[0];
-      if (task) {
-        destinationCol?.tasksIds.splice(destination.index, 0, task);
-        setState({ ...state, columns: [...state.columns] });
+      const taskId = sourceCol?.tasksIds.splice(source.index, 1)[0];
+      const tasks = { ...state.tasks };
+      if (taskId) {
+        tasks[taskId].columnId = destination.droppableId;
+        destinationCol?.tasksIds.splice(destination.index, 0, taskId);
+        setState({ ...state, columns });
       }
     }
   };
@@ -41,7 +44,7 @@ export default function Board() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
         <header className={styles.header}>
-          <h1>Trello Kanban Board</h1>
+          <h1>Trello Kanban Board: {state.scope}</h1>
           <hr />
         </header>
         <ColumnList columns={state.columns} />
