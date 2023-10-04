@@ -17,13 +17,12 @@ export default function Board() {
     }
 
     /** column id always starts with "column-" */
-    const columns = state.columns;
+    const columns = [...state.columns];
     if (draggableId.startsWith("column-")) {
       const column = columns.splice(source.index, 1)[0];
       columns.splice(destination.index, 0, column);
-      setState({ ...state, columns: [...state.columns] });
+      setState({ ...state, columns: columns });
     } else {
-      const columns = [...state.columns];
       const sourceCol = columns.find((c) => c.id === source.droppableId);
       let destinationCol;
       if (destination.droppableId === "columns") {

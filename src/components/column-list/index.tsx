@@ -8,7 +8,7 @@ import { createId } from "@paralleldrive/cuid2";
 export default function ColumnList({ columns }: { columns: ColumnType[] }) {
   const { state, setState } = useGlobalState();
   const addColumn = () =>
-    setState({ ...state, columns: [...state.columns, { id: createId(), title: "", tasksIds: [] }] });
+    setState({ ...state, columns: [...state.columns, { id: "column-" + createId(), title: "", tasksIds: [] }] });
   return (
     <Droppable droppableId={"columns"} direction="horizontal" type="column">
       {(provided) => (
