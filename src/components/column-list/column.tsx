@@ -5,6 +5,7 @@ import Task from "components/task";
 import { useGlobalState } from "utils/context";
 import { createId } from "@paralleldrive/cuid2";
 import ColumnHeader from "./column-header";
+import { vscode } from "utils/vscode";
 
 export default function Column({ column, index }: { column: ColumnType; index: number }) {
   const { state, setState } = useGlobalState();
@@ -16,6 +17,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
     };
     column.tasksIds = [...column.tasksIds, newTask.id];
     setState({ ...state, tasks: { ...state.tasks, [newTask.id]: newTask }, columns: [...state.columns] });
+    vscode.toast(`New task created in ${column?.title} column!`, "success");
   };
   return (
     <Draggable draggableId={column.id} index={index}>

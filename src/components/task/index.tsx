@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import ReactMarkdown from "react-markdown";
 import { useGlobalState } from "utils/context";
 import styles from "./task.module.scss";
+import { vscode } from "utils/vscode";
 
 export default function Task({ task, index }: { task: TaskType; index: number }) {
   const { state, setState } = useGlobalState();
@@ -32,6 +33,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
       column.tasksIds = column.tasksIds.filter((id) => id !== task.id);
     }
     setState({ ...state, tasks, columns });
+    vscode.toast("Task deleted!", "success");
   };
   return (
     <Draggable draggableId={task.id} index={index}>
