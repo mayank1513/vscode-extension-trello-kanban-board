@@ -16,9 +16,19 @@
 
 ## Installation
 
+[Click here](vscode:extension/mayank1513.trello-kanban-task-board) to install this extension.
+
+OR
+
+Visit [MarketPlace](https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board)
+
+OR
+
 Search for `trello-kanban-task-board` and install from extensions panel.
 
-Or enter and run following command in Command Pallete by pressing `(ctrl+shift+P)`
+OR
+
+enter and run following command in Command Pallete by pressing `(ctrl+shift+P)`
 
 ```
 ext install trello-kanban-task-board
