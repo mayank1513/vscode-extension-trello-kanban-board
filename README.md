@@ -1,27 +1,52 @@
-# React + TypeScript + Vite
+# Trello Kanban Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Organize your work/ideas with Trello like Kanban board!
 
-Currently, two official plugins are available:
+✅ Supports Markdown - create task description in markdown
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ Drag and rearrange tasks and lists
 
-## Expanding the ESLint configuration
+✅ Use gloabl board for worspace independent tasks
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+✅ Use workspace board specific to the workspace to manage the workspace without clutter
 
-- Configure the top-level `parserOptions` property like this:
+✅ Intuitive drag and drop UI
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+## Installation
+
+Search for `trello-kanban-task-board` and install from extensions panel.
+
+Or enter and run following command in Command Pallete by pressing `(ctrl+shift+P)`
+
+```
+ext install trello-kanban-task-board
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Usage
+
+`TrelloKanban` offers a global kanban board and a workspace kanban board for each workspace.
+
+1. Open the Command Pallete by pressing `(ctrl+shift+P)`
+2. Select `TrelloKanban: Workspace` or `TrelloKanban: Global` for workspace or global board respectively
+
+# Contribute
+
+You can contribute by creating issues and PRs or by sponsoring my work.
+
+1. Report [issues/bugs](https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues)
+2. Star and Fork the [repo](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
+3. Sponsore - [GitHub Sponsor](https://github.com/sponsors/mayank1513) Or [RazorPay](https://pages.razorpay.com/mayank1513)
+
+### [🤩 Don't forger to start this repo!](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
+
+[💖](https://github.com/mayank1513/vscode-extension-trello-kanban-board) [🌟](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
+
+Want handson course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://www.udemy.com/course/react-and-next-js-with-typescript/?referralCode=7202184A1E57C3DCA8B2) and [The Game of Chess with Next.js, React and TypeScrypt](https://www.udemy.com/course/game-of-chess-with-nextjs-react-and-typescrypt/?referralCode=851A28F10B254A8523FE)
+
+## License
+
+Licensed as MIT open source.
+
+<hr />
+
+<p align="center" style="text-align:center">with 💖 by <a href="https://mayank-chaudhari.vercel.app" target="_blank">Mayank Kumar Chaudhari</a></p>
