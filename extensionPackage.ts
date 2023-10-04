@@ -28,3 +28,5 @@ const packageJSON = {
 };
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));
+
+fs.copyFileSync(path.resolve(process.cwd(), "README.md"), path.resolve(process.cwd(), "dist", "README.md"));
