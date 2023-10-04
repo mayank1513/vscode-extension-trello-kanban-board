@@ -14,6 +14,13 @@ const packageJSON = {
   engines: {
     vscode: "^1.75.0",
   },
+  repository: {
+    type: "git",
+    url: "https://github.com/mayank1513/vscode-extension-trello-kanban-board",
+  },
+  bugs: {
+    url: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues",
+  },
   main: "./index.js",
   contributes: {
     commands: scopes.map((scope) => ({
@@ -25,6 +32,7 @@ const packageJSON = {
   sponsor: {
     url: "https://github.com/sponsors/mayank1513",
   },
+  license: "MIT",
 };
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));
