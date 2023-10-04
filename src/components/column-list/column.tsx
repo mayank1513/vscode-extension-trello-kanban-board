@@ -22,16 +22,12 @@ export default function Column({ column, index }: { column: ColumnType; index: n
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided) => (
-        <div
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-          className={styles.columnContainer}>
+        <div {...provided.draggableProps} ref={provided.innerRef} className={styles.columnContainer}>
           <Droppable droppableId={column.id} direction="vertical">
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
                 <div className={styles.column}>
-                  <ColumnHeader column={column} />
+                  <ColumnHeader column={column} {...provided.dragHandleProps} />
                   <hr />
                   <div className={styles.taskList}>
                     {column.tasksIds.map((taskId, index) => (

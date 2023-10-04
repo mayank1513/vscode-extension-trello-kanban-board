@@ -7,7 +7,7 @@ export const defaultBoard: BoardType = {
   tasks: {
     [taskId]: {
       id: taskId,
-      description: "Move me to another column",
+      description: "Create new tasks\n\nTask can also contain lists\n\n- list item 1\n\n- list item 2",
       columnId: "column-todo",
     },
   },
