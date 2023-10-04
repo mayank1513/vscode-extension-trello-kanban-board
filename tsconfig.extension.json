@@ -4,7 +4,7 @@
     "target": "es6",
     "outDir": "dist",
     "lib": ["es6", "dom"],
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true
   },
   "include": ["extension"]
