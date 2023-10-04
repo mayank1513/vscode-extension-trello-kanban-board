@@ -35,40 +35,45 @@ export default function Task({ task, index }: { task: TaskType; index: number })
   };
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided) => (
-        <label
-          onClick={() => {
-            setIsEditing(true);
-            resizeTextArea();
-          }}
-          htmlFor={id}
-          ref={provided.innerRef}
-          {...provided.dragHandleProps}
-          {...provided.draggableProps}
-          className={styles.task}>
-          <textarea
-            id={id}
-            value={text}
-            ref={textareaRef}
-            onChange={(e) => {
-              setText(e.target.value);
+      {(provided, snapshot) => {
+        if (snapshot.isDragging && provided.draggableProps.style?.transform) {
+          provided.draggableProps.style.transform += " rotate(5deg)";
+        }
+        return (
+          <label
+            onClick={() => {
+              setIsEditing(true);
               resizeTextArea();
             }}
-            onBlur={onBlur}
-            placeholder="Enter task description in Markdown format"
-            hidden={!isEditing}
-          />
-          <span className={styles.close} onClick={removeTask}>
-            ✖
-          </span>
-          {!isEditing &&
-            (task.description.trim() ? (
-              <ReactMarkdown>{task.description}</ReactMarkdown>
-            ) : (
-              <p className={styles.placeholder}>Enter task description in Markdown format.</p>
-            ))}
-        </label>
-      )}
+            htmlFor={id}
+            ref={provided.innerRef}
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
+            className={styles.task}>
+            <textarea
+              id={id}
+              value={text}
+              ref={textareaRef}
+              onChange={(e) => {
+                setText(e.target.value);
+                resizeTextArea();
+              }}
+              onBlur={onBlur}
+              placeholder="Enter task description in Markdown format"
+              hidden={!isEditing}
+            />
+            <span className={styles.close} onClick={removeTask}>
+              ✖
+            </span>
+            {!isEditing &&
+              (task.description.trim() ? (
+                <ReactMarkdown>{task.description}</ReactMarkdown>
+              ) : (
+                <p className={styles.placeholder}>Enter task description in Markdown format.</p>
+              ))}
+          </label>
+        );
+      }}
     </Draggable>
   );
 }

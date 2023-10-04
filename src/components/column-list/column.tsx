@@ -20,17 +20,18 @@ export default function Column({ column, index }: { column: ColumnType; index: n
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided) => (
-        <div {...provided.draggableProps} ref={provided.innerRef} className={styles.columnContainer}>
+        <div
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          className={styles.columnContainer}>
           <Droppable droppableId={column.id} direction="vertical">
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
                 <div className={styles.column}>
-                  <ColumnHeader {...provided.dragHandleProps} column={column} />
+                  <ColumnHeader column={column} />
                   <hr />
                   <div className={styles.taskList}>
-                    {/* <Draggable draggableId={column.id + "-empty"} index={0}>
-                      {() => <></>}
-                    </Draggable> */}
                     {column.tasksIds.map((taskId, index) => (
                       <Task key={taskId} task={state.tasks[taskId]} index={index} />
                     ))}
