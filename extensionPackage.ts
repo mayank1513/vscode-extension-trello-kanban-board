@@ -37,6 +37,9 @@ const packageJSON = {
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));
 
-fs.copyFileSync(path.resolve(process.cwd(), "README.md"), path.resolve(process.cwd(), "dist", "README.md"));
+const readMe = fs.readFileSync(path.resolve(process.cwd(), "README.md"), "utf-8");
+
+fs.writeFileSync(path.resolve(process.cwd(), "dist", "README.md"), readMe.replace(/.*\.svg.*/g, "")); // remove lines with .svg
+fs.copyFileSync(path.resolve(process.cwd(), "LICENSE"), path.resolve(process.cwd(), "dist", "LICENSE"));
 
 fs.unlinkSync(path.resolve(process.cwd(), "dist", "index.html"));
