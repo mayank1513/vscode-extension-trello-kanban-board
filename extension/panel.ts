@@ -32,8 +32,6 @@ export class Panel {
     const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
     const iconUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "logo.png"));
 
-    console.log("cspSource -- ", webview.cspSource, "--done");
-
     webview.html = `
     <!DOCTYPE html>
       <html lang="en">
@@ -77,7 +75,7 @@ export class Panel {
           case "load":
             {
               const data = momento.get(key) || { scope };
-              webview.postMessage({ action: "load", data: { ...data } } as MessageType);
+              webview.postMessage({ action: "load", data: { ...data, scope } } as MessageType);
             }
             break;
           case "save":

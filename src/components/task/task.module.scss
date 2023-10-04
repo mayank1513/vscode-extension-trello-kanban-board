@@ -3,16 +3,13 @@
   padding: 5px;
   border-radius: 5px;
   border: 1px solid gray;
+  box-shadow: 0 0 5px #555;
   display: block;
   position: relative;
+  background: var(--vscode-editor-background);
   textarea {
     width: calc(100% - 10px);
-    outline: none;
-    border: none;
-    background: transparent;
     resize: none;
-    font-size: inherit;
-    font-family: inherit;
   }
   * {
     margin: 2px 0;
