@@ -23,7 +23,7 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
       delete tasks[tid];
     });
     setState({ ...state, columns: state.columns.filter((c) => c !== column), tasks });
-    vscode.postMessage({ action: "warn", text: `${column.title} column and ${column.tasksIds.length} tasks deleted!` });
+    vscode.toast(`${column.title} column and ${column.tasksIds.length} tasks deleted!`, "warn");
   };
   return (
     <header {...rest} className={styles.header}>

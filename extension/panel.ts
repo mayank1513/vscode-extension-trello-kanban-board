@@ -85,6 +85,7 @@ export class Panel {
           case "save":
             momento.update(key, data);
             break;
+          case "success":
           case "info":
             window.showInformationMessage(text || "");
             break;

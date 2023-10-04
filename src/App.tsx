@@ -4,6 +4,8 @@ import { BoardType } from "@/interface";
 import { defaultBoard } from "utils/data";
 import Board from "components/board";
 import { GlobalContext } from "utils/context";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [state, _setState] = useState<BoardType>(defaultBoard);
@@ -19,6 +21,7 @@ function App() {
   return (
     <GlobalContext.Provider value={{ state, setState }}>
       <Board />
+      <ToastContainer position="bottom-right" />
     </GlobalContext.Provider>
   );
 }

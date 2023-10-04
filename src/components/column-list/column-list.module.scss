@@ -20,7 +20,7 @@
   border-radius: 10px;
   border: 1px solid gray;
   box-shadow: 0 0 5px #555;
-  background: var(--vscode-editor-background);
+  background: var(--bg);
 }
 .header {
   &:hover .close {
@@ -40,6 +40,7 @@
   margin: 5px;
   width: calc(100% - 10px);
   cursor: pointer;
+  padding: 5px;
 }
 .addColumn {
   margin: 10px;
