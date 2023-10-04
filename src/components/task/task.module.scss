@@ -6,7 +6,7 @@
   box-shadow: 0 0 5px #555;
   display: block;
   position: relative;
-  background: var(--vscode-editor-background);
+  background: var(--bg);
   textarea {
     width: calc(100% - 10px);
     resize: none;
