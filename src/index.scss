@@ -3,9 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,12 +19,16 @@ body {
   min-height: 100vh;
 }
 
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: inherit;
+}
+
 [hidden] {
   display: none !important;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 }

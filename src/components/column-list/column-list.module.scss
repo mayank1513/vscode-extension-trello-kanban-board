@@ -18,16 +18,11 @@
   max-height: 100%;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 1px #555;
+  border: 1px solid gray;
+  box-shadow: 0 0 5px #555;
+  background: var(--vscode-editor-background);
 }
 .header {
-  input {
-    font-family: inherit;
-    font-size: inherit;
-    background: transparent;
-    outline: none;
-    border: none;
-  }
   &:hover .close {
     display: inline-block;
   }
