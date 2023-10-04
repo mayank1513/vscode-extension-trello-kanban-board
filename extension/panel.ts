@@ -25,6 +25,10 @@ export class Panel {
     }
   }
 
+  public static revive(panel: WebviewPanel, context: ExtensionContext, scope: ScopeType) {
+    this.Panels[scope] = new Panel(panel, context, scope);
+  }
+
   private _setupWebView() {
     const { extensionUri, globalState, workspaceState } = this._context;
     const { webview } = this._panel;

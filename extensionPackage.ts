@@ -21,6 +21,7 @@ const packageJSON = {
       title: "TrelloKanban: " + scope,
     })),
   },
+  activationEvents: scopes.map((scope) => `onWebviewPanel:${prefix}${scope}`),
   sponsor: {
     url: "https://github.com/sponsors/mayank1513",
   },

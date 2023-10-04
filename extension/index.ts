@@ -1,4 +1,4 @@
-import { ExtensionContext, commands } from "vscode";
+import { ExtensionContext, commands, window } from "vscode";
 import { Panel } from "./panel";
 import { prefix, scopes } from "./constants";
 
@@ -9,5 +9,10 @@ export function activate(context: ExtensionContext) {
         Panel.render(context, scope);
       })
     );
+    window.registerWebviewPanelSerializer(prefix + scope, {
+      async deserializeWebviewPanel(webviewPanel) {
+        Panel.revive(webviewPanel, context, scope);
+      },
+    });
   });
 }
