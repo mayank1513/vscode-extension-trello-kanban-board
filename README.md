@@ -16,7 +16,7 @@
 
 ## Installation
 
-[Click here](vscode:extension/mayank1513.trello-kanban-task-board) to install this extension.
+Click <a href="vscode:extension/mayank1513.trello-kanban-task-board">here</a> to install this extension.
 
 OR
 

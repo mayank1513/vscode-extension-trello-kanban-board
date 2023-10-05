@@ -50,7 +50,7 @@ class VSCodeAPIWrapper {
       });
     } else {
       const state = localStorage.getItem("vscodeState");
-      return state ? JSON.parse(state) : { ...defaultBoard, scope: "Browser" };
+      return { ...(state ? JSON.parse(state) : defaultBoard), scope: "Browser" };
     }
   }
 

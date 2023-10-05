@@ -24,3 +24,24 @@
 .theme2 {
   background: linear-gradient(-45deg, orange, red);
 }
+
+.install {
+  all: unset;
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  display: block;
+  padding: 10px 20px 12px 20px;
+  cursor: pointer;
+  background: linear-gradient(-45deg, orange, red);
+  font-weight: bold;
+  border-radius: 10px;
+  text-shadow: 2px 3px 5px #558;
+  box-shadow: 2px 2px 5px #555;
+  &:hover {
+    box-shadow: none;
+  }
+  &:active {
+    box-shadow: -2px -2px 5px inset #555;
+  }
+}

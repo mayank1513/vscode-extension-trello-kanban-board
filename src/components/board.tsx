@@ -47,6 +47,11 @@ export default function Board() {
           <hr />
         </header>
         <ColumnList columns={state.columns} />
+        {state.scope === "Browser" && (
+          <a href="vscode:extension/mayank1513.trello-kanban-task-board" className={styles.install}>
+            Install VSCode Extension
+          </a>
+        )}
       </div>
     </DragDropContext>
   );
