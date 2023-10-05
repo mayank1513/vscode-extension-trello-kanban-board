@@ -1,0 +1,23 @@
+name: Publish
+
+# publish only when package json has changed - assuming version upgrade
+on:
+  push:
+    branches: [master]
+    paths: "package.json"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run deploy
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
