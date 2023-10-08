@@ -42,7 +42,7 @@ export default function Board() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
-        <header className={styles.header}>
+        <header className={styles.header} data-testid="board-header">
           <h1>Trello Kanban Board: {state.scope}</h1>
           <hr />
         </header>
