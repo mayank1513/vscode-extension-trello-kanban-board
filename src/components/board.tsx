@@ -2,6 +2,8 @@ import { useGlobalState } from "utils/context";
 import styles from "./board.module.scss";
 import ColumnList from "./column-list";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { ForkMe } from "@mayank1513/fork-me/server";
+import "@mayank1513/fork-me/server/index.css";
 
 export default function Board() {
   const { setState, state } = useGlobalState();
@@ -44,9 +46,17 @@ export default function Board() {
         </header>
         <ColumnList columns={state.columns} />
         {state.scope === "Browser" && (
-          <a href="vscode:extension/mayank1513.trello-kanban-task-board" className={styles.install}>
-            Install VSCode Extension
-          </a>
+          <>
+            <ForkMe
+              gitHubUrl="https://github.com/mayank1513/vscode-extension-trello-kanban-board"
+              noAutoFork
+              textColor="lightgreen"
+              bgColor="orangered"
+            />
+            <a href="vscode:extension/mayank1513.trello-kanban-task-board" className={styles.install}>
+              Install VSCode Extension
+            </a>
+          </>
         )}
       </div>
     </DragDropContext>
