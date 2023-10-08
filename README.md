@@ -1,4 +1,6 @@
-# Trello Kanban Board [![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board)
+# Trello Kanban Board
+
+[![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board)
 
 > Organize your work/ideas with Trello like Kanban board!
 
