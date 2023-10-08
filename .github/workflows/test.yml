@@ -1,10 +1,7 @@
-name: Publish
+name: Test
 
 # publish only when package json has changed - assuming version upgrade
-on:
-  push:
-    branches: [master]
-    paths: "package.json"
+on: [push, pull_request]
 
 jobs:
   publish:
@@ -17,7 +14,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm i && npm test && npm i -g @vscode/vsce
-      - run: npm run deploy
+      - run: npm i && npm test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
         env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
