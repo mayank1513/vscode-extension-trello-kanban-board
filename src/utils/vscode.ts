@@ -7,25 +7,17 @@ class VSCodeAPIWrapper {
   private readonly vsCodeApi: WebviewApi<unknown> | undefined;
 
   constructor() {
-    if (typeof acquireVsCodeApi === "function") {
-      this.vsCodeApi = acquireVsCodeApi();
-    }
+    if (typeof acquireVsCodeApi === "function") this.vsCodeApi = acquireVsCodeApi();
   }
 
   private _postMessage(message: MessageType) {
-    if (this.vsCodeApi) {
-      this.vsCodeApi.postMessage(message);
-    } else {
-      console.log(message);
-    }
+    if (this.vsCodeApi) this.vsCodeApi.postMessage(message);
+    else console.log(message);
   }
 
   public toast(text: string, type: "info" | "warn" | "error" | "success" = "info") {
-    if (this.vsCodeApi) {
-      this._postMessage({ action: type, text });
-    } else {
-      _toast[type](text);
-    }
+    if (this.vsCodeApi) this._postMessage({ action: type, text });
+    else _toast[type](text);
   }
 
   /**
@@ -66,11 +58,8 @@ class VSCodeAPIWrapper {
    * @return The new state.
    */
   public setState(newState: BoardType) {
-    if (this.vsCodeApi) {
-      this._postMessage({ action: "save", data: newState });
-    } else {
-      localStorage.setItem("vscodeState", JSON.stringify(newState));
-    }
+    if (this.vsCodeApi) this._postMessage({ action: "save", data: newState });
+    else localStorage.setItem("vscodeState", JSON.stringify(newState));
   }
 }
 

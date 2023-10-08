@@ -8,13 +8,9 @@ export default function Board() {
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
-    if (!destination) {
-      return;
-    }
+    if (!destination) return;
 
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
-    }
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
     /** column id always starts with "column-" */
     const columns = [...state.columns];
