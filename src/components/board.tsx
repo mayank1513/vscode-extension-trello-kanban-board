@@ -8,13 +8,9 @@ export default function Board() {
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
-    if (!destination) {
-      return;
-    }
+    if (!destination) return;
 
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
-    }
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
     /** column id always starts with "column-" */
     const columns = [...state.columns];
@@ -42,7 +38,7 @@ export default function Board() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
-        <header className={styles.header}>
+        <header className={styles.header} data-testid="board-header">
           <h1>Trello Kanban Board: {state.scope}</h1>
           <hr />
         </header>

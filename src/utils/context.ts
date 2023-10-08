@@ -1,7 +1,7 @@
 import { BoardType } from "@/interface";
 import { createContext, useContext } from "react";
 
-interface ContextType {
+export interface ContextType {
   state: BoardType;
   setState: (state: BoardType) => void;
 }

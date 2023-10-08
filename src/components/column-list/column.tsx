@@ -22,7 +22,11 @@ export default function Column({ column, index }: { column: ColumnType; index: n
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided) => (
-        <div {...provided.draggableProps} ref={provided.innerRef} className={styles.columnContainer}>
+        <div
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          className={styles.columnContainer}
+          data-testid={`column-${index}`}>
           <Droppable droppableId={column.id} direction="vertical">
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
