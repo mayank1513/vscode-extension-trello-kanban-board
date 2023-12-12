@@ -3,7 +3,7 @@ import styles from "./column-list.module.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "components/task";
 import { useGlobalState } from "utils/context";
-import { createId } from "@paralleldrive/cuid2";
+import { nanoid } from "nanoid";
 import ColumnHeader from "./column-header";
 import { vscode } from "utils/vscode";
 
@@ -11,7 +11,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
   const { state, setState } = useGlobalState();
   const addTask = () => {
     const newTask: TaskType = {
-      id: createId(),
+      id: nanoid(),
       description: "",
       columnId: column.id,
     };

@@ -3,12 +3,12 @@ import { Droppable } from "react-beautiful-dnd";
 import Column from "./column";
 import { ColumnType } from "@/interface";
 import { useGlobalState } from "utils/context";
-import { createId } from "@paralleldrive/cuid2";
+import { nanoid } from "nanoid";
 
 export default function ColumnList({ columns }: { columns: ColumnType[] }) {
   const { state, setState } = useGlobalState();
   const addColumn = () =>
-    setState({ ...state, columns: [...state.columns, { id: "column-" + createId(), title: "", tasksIds: [] }] });
+    setState({ ...state, columns: [...state.columns, { id: "column-" + nanoid(), title: "", tasksIds: [] }] });
   return (
     <Droppable droppableId={"columns"} direction="horizontal" type="column">
       {(provided) => (
