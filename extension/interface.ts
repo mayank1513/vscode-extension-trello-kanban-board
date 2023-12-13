@@ -1,5 +1,5 @@
 export interface MessageType {
-  action: "save" | "load" | "info" | "warn" | "error" | "success";
+  action: "save" | "load" | "info" | "warn" | "error" | "success" | "settings";
   data?: BoardType;
   text?: string;
 }

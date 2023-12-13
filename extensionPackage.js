@@ -8,8 +8,24 @@ export const prefix = "mayank1513.trello-kanban.";
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf-8"));
 
+const configs = {};
+
+scopes.forEach((scope) => {
+  configs[prefix + scope + ".statusBar.alignment"] = {
+    type: "string",
+    default: "Left",
+    enum: ["Left", "Right", "None"],
+    description: "Show the Kanban button on the left or right side of your status bar, or nowhere.",
+  };
+  configs[prefix + scope + ".statusBar.priority"] = {
+    type: "number",
+    default: 100,
+    description: "Where the Kanban button should be in relation to other buttons. A higher value means further left.",
+  };
+});
+
 const packageJSON = {
-  name: "trello-kanban-task-board",
+  name: pkg.name,
   displayName: "Trello like kanban board",
   description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
   version: pkg.version,
@@ -31,6 +47,10 @@ const packageJSON = {
       command: prefix + scope,
       title: "TrelloKanban: " + scope,
     })),
+    configuration: {
+      title: "Trello Kanban Board",
+      properties: configs,
+    },
   },
   activationEvents: scopes.map((scope) => `onWebviewPanel:${prefix}${scope}`),
   sponsor: {

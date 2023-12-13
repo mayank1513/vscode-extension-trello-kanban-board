@@ -1,4 +1,14 @@
-import { Disposable, ExtensionContext, Memento, Uri, ViewColumn, Webview, WebviewPanel, window } from "vscode";
+import {
+  Disposable,
+  ExtensionContext,
+  Memento,
+  Uri,
+  ViewColumn,
+  Webview,
+  WebviewPanel,
+  commands,
+  window,
+} from "vscode";
 import { ScopeType, prefix } from "./constants";
 import { MessageType } from "./interface";
 
@@ -101,6 +111,9 @@ export class Panel {
         break;
       case "error":
         window.showErrorMessage(text || "");
+        break;
+      case "settings":
+        commands.executeCommand("workbench.action.openSettings", "mayank1513.trello-kanban-task-board");
         break;
     }
   }

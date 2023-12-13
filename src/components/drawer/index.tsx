@@ -1,3 +1,4 @@
+import { vscode } from "utils/vscode";
 import styles from "./drawer.module.scss";
 
 const links = [
@@ -22,6 +23,15 @@ export default function Drawer({ open }: { open: boolean }) {
             </a>
           </li>
         ))}
+        <li>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              vscode.openSettings();
+            }}>
+            ⚙ Settings
+          </a>
+        </li>
       </ul>
     </aside>
   );

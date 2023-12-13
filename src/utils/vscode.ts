@@ -20,6 +20,11 @@ class VSCodeAPIWrapper {
     else _toast[type](text);
   }
 
+  public openSettings() {
+    if (this.vsCodeApi) this._postMessage({ action: "settings" });
+    else _toast("Open Settings", { type: "info" });
+  }
+
   /**
    * Get the persistent state stored for this webview.
    *
