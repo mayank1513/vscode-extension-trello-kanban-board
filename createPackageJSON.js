@@ -1,12 +1,44 @@
 /* eslint-disable no-undef */
 import fs from "fs";
 import path from "path";
+import { Octokit } from "octokit";
 
 /** Following constants should match /extension/constants.ts */
 const scopes = ["Workspace", "Global"];
 export const prefix = "mayank1513.trello-kanban.";
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf-8"));
+
+if (process.env.TOKEN) {
+  // Octokit.js
+  // https://github.com/octokit/core.js#readme
+  const octokit = new Octokit({
+    auth: process.env.TOKEN,
+  });
+
+  const octoOptions = {
+    owner: process.env.OWNER,
+    repo: process.env.REPO,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  };
+  const tagName = `v${pkg.version}`;
+  const name = `Release ${tagName}`;
+  /** Create a release */
+  octokit.request("POST /repos/{owner}/{repo}/releases", {
+    ...octoOptions,
+    tag_name: tagName,
+    target_commitish: "main",
+    name,
+    draft: false,
+    prerelease: false,
+    generate_release_notes: true,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+}
 
 const configs = {};
 

@@ -12,7 +12,7 @@ const links = [
   { text: "🤝 Get in touch", href: "https://mayank-chaudhari.vercel.app/" },
 ];
 
-export default function Drawer({ open }: { open: boolean }) {
+export default function Drawer({ open, isBrowser }: { open: boolean; isBrowser: boolean }) {
   return (
     <aside className={[styles.drawer, open ? styles.open : ""].join(" ")}>
       <ul>
@@ -23,15 +23,17 @@ export default function Drawer({ open }: { open: boolean }) {
             </a>
           </li>
         ))}
-        <li>
-          <a
-            onClick={(e) => {
-              e.preventDefault();
-              vscode.openSettings();
-            }}>
-            ⚙ Settings
-          </a>
-        </li>
+        {!isBrowser && (
+          <li>
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                vscode.openSettings();
+              }}>
+              ⚙ Settings
+            </a>
+          </li>
+        )}
       </ul>
     </aside>
   );
