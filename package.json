@@ -4,7 +4,7 @@
   "version": "0.1.1",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3000",
+    "dev": "vite",
     "build": "tsc && vite build",
     "build:all": "npm run build && npm run build:extension",
     "test": "vitest run --coverage",
