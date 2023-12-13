@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import fs from "fs";
 import path from "path";
+import pkg from "./package.json";
 
 /** Following constants should match /extension/constants.ts */
 const scopes = ["Workspace", "Global"];
@@ -10,7 +11,7 @@ const packageJSON = {
   name: "trello-kanban-task-board",
   displayName: "Trello like kanban board",
   description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
-  version: "0.0.1",
+  version: pkg.version,
   publisher: "mayank1513",
   icon: "logo.png",
   engines: {
