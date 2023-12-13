@@ -4,11 +4,24 @@ import Column from "./column";
 import { ColumnType } from "@/interface";
 import { useGlobalState } from "utils/context";
 import { nanoid } from "nanoid";
+import { vscode } from "utils/vscode";
 
 export default function ColumnList({ columns }: { columns: ColumnType[] }) {
   const { state, setState } = useGlobalState();
-  const addColumn = () =>
-    setState({ ...state, columns: [...state.columns, { id: "column-" + nanoid(), title: "", tasksIds: [] }] });
+  const addColumn = () => {
+    const id = "column-" + nanoid();
+    setState({ ...state, columns: [...state.columns, { id, title: "", tasksIds: [] }] });
+    vscode.toast(`New column created!`, "success");
+    setTimeout(() => {
+      const newColumnElement = document.getElementById(id);
+      newColumnElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      newColumnElement?.getElementsByTagName("label")[0].click();
+      setTimeout(() => {
+        newColumnElement?.getElementsByTagName("input")[0].focus();
+        newColumnElement?.getElementsByTagName("input")[0].click();
+      }, 100);
+    }, 100);
+  };
   return (
     <Droppable droppableId={"columns"} direction="horizontal" type="column">
       {(provided) => (

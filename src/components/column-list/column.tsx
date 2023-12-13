@@ -40,6 +40,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
       {(provided) => (
         <div
           {...provided.draggableProps}
+          id={column.id}
           ref={provided.innerRef}
           className={styles.columnContainer}
           data-testid={`column-${index}`}>
