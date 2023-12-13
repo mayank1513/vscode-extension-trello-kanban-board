@@ -28,6 +28,10 @@ export default function Column({ column, index }: { column: ColumnType; index: n
       setTimeout(() => {
         newTaskElement?.getElementsByTagName("textarea")[0].focus();
         newTaskElement?.getElementsByTagName("textarea")[0].click();
+        setTimeout(
+          () => newTaskElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" }),
+          100
+        );
       }, 50);
     }, 250);
   };
