@@ -41,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "jsdom": "^23.0.1",
+    "octokit": "^3.1.2",
     "sass": "^1.69.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
