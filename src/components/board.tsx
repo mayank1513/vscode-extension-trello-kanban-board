@@ -5,19 +5,27 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "@mayank1513/fork-me/server/index.css";
 import { BoardType } from "@/interface";
+import DrawerToggle from "./drawer-toggle";
+import { useState } from "react";
+import Drawer from "./drawer";
 
 export default function Board() {
   const { state, setState } = useGlobalState();
+  const [open, setOpen] = useState(false);
 
   const onDragEnd = (result: DropResult) => handleDragEnd(result, state, setState);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
         <header className={styles.header} data-testid="board-header">
+          <DrawerToggle toggle={() => setOpen(!open)} isOpen={open} />
           <h1>Trello Kanban Board: {state.scope}</h1>
           <hr />
         </header>
-        <ColumnList columns={state.columns} />
+        <main className={styles.main}>
+          <Drawer open={open} />
+          <ColumnList columns={state.columns} />
+        </main>
         {state.scope === "Browser" && <BrowserOnlyUI />}
       </div>
     </DragDropContext>
