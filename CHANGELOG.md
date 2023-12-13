@@ -1,5 +1,11 @@
 # trello-kanban-task-board
 
+## 0.1.2
+
+### Patch Changes
+
+- Scroll to bring the new column into view
+
 ## 0.1.1
 
 ### Patch Changes
