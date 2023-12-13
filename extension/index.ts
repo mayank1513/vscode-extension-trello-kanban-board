@@ -30,10 +30,7 @@ export function activate(context: ExtensionContext) {
 function listenConfigChange(context: ExtensionContext) {
   workspace.onDidChangeConfiguration((e) => {
     scopes.forEach((scope) => {
-      if (e.affectsConfiguration(prefix + scope + ".statusBar")) {
-        if (viewButtons[scope]) viewButtons[scope]?.hide();
-        createStatusBarButton(context, scope);
-      }
+      if (e.affectsConfiguration(prefix + scope + ".statusBar")) createStatusBarButton(context, scope);
     });
   });
 }
@@ -57,8 +54,8 @@ function createStatusBarButton(context: ExtensionContext, scope: ScopeType) {
 
     viewButtons[scope] = viewButton;
     if (viewButton) {
-      viewButton.show();
       context.subscriptions.push(viewButton);
+      viewButton.show();
     }
   }
 }
