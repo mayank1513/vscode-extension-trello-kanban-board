@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
+    "build:all": "npm run build && npm run build:extension",
     "test": "vitest run --coverage",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build:extension": "tsc -p tsconfig.extension.json && node extensionPackage.js",
-    "deploy": "npm run build && npm run build:extension && cd dist && vsce publish"
+    "deploy": "npm run build:all && cd dist && vsce publish"
   },
   "dependencies": {
     "@mayank1513/fork-me": "^2.0.0",

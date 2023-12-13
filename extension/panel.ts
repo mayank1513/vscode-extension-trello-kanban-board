@@ -24,19 +24,20 @@ export class Panel {
     this._context = context;
     this._setupWebView();
   }
+
   public static render(context: ExtensionContext, scope: ScopeType) {
-    if (this.Panels[scope]) {
-      this.Panels[scope]?._panel.reveal(ViewColumn.One);
+    if (Panel.Panels[scope]) {
+      Panel.Panels[scope]?._panel.reveal(ViewColumn.One);
     } else {
       const panel = window.createWebviewPanel("TrelloKanban: " + scope, "TrelloKanban: " + scope, ViewColumn.One, {
         enableScripts: true,
       });
-      this.Panels[scope] = new Panel(panel, context, scope);
+      Panel.Panels[scope] = new Panel(panel, context, scope);
     }
   }
 
   public static revive(panel: WebviewPanel, context: ExtensionContext, scope: ScopeType) {
-    this.Panels[scope] = new Panel(panel, context, scope);
+    Panel.Panels[scope] = new Panel(panel, context, scope);
   }
 
   private _setupWebView() {
@@ -45,7 +46,7 @@ export class Panel {
 
     webview.html = this._getHTML(webview, extensionUri);
 
-    this._panel.onDidDispose(this._dispose, null, this._disposables);
+    this._panel.onDidDispose(this._dispose, this, this._disposables);
 
     // message listeners
     const scope = this._scope;
@@ -79,6 +80,7 @@ export class Panel {
   }
 
   private _dispose() {
+    Panel.Panels[this._scope] = undefined;
     this._panel.dispose();
     // Dispose of all disposables (i.e. commands) for the current webview panel
     // using while loop as disposables might be added while disposing other disposables in the array
