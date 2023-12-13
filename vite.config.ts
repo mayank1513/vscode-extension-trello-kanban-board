@@ -22,7 +22,7 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html", "clover"],
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/**/main.tsx", "src/**/*.d.ts"],
+      exclude: ["src/**/main.tsx", "src/**/vscode.ts", "src/**/*.d.ts"],
     },
   },
 });
