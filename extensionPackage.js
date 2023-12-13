@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
 import fs from "fs";
 import path from "path";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore -- ts-node expects .ts extension
-import { prefix, scopes } from "./extension/constants.ts";
+
+/** Following constants should match /extension/constants.ts */
+const scopes = ["Workspace", "Global"];
+export const prefix = "mayank1513.trello-kanban.";
 
 const packageJSON = {
   name: "trello-kanban-task-board",
