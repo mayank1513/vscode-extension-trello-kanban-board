@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - run: npm i && npm test && npm i -g @vscode/vsce
       - run: npm run deploy
         env:
