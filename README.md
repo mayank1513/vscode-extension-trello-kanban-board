@@ -16,11 +16,9 @@
 
 ✅ Intuitive drag and drop UI
 
+✅ Awailable for web as well - https://vscode-extension-trello-kanban-board.vercel.app/
+
 ## Installation
-
-Click <a href="vscode:extension/mayank1513.trello-kanban-task-board">here</a> to install this extension.
-
-OR
 
 Visit [MarketPlace](https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board)
 

@@ -1,4 +1,4 @@
-import { Disposable, ExtensionContext, Uri, ViewColumn, WebviewPanel, window } from "vscode";
+import { Disposable, ExtensionContext, Memento, Uri, ViewColumn, Webview, WebviewPanel, window } from "vscode";
 import { ScopeType, prefix } from "./constants";
 import { MessageType } from "./interface";
 
@@ -32,11 +32,26 @@ export class Panel {
   private _setupWebView() {
     const { extensionUri, globalState, workspaceState } = this._context;
     const { webview } = this._panel;
+
+    webview.html = this._getHTML(webview, extensionUri);
+
+    this._panel.onDidDispose(this._dispose, null, this._disposables);
+
+    // message listeners
+    const scope = this._scope;
+    const memento = scope === "Global" ? globalState : workspaceState;
+    webview.onDidReceiveMessage(
+      (message: MessageType) => this._messageHandler(message, memento, prefix, scope, webview),
+      undefined,
+      this._disposables
+    );
+  }
+
+  private _getHTML(webview: Webview, extensionUri: Uri) {
     const cssUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.css"));
     const jsUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "assets", "index.js"));
     const iconUri = webview.asWebviewUri(Uri.joinPath(extensionUri, "logo.png"));
-
-    webview.html = `
+    return `
     <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -51,54 +66,42 @@ export class Panel {
           <script type="module" src="${jsUri}"></script>
         </body>
       </html>`;
+  }
 
-    this._panel.onDidDispose(
-      () => {
-        this._panel.dispose();
-        // Dispose of all disposables (i.e. commands) for the current webview panel
-        // using while loop as disposables might be added while disposing other disposables in the array
-        while (this._disposables.length) {
-          const disposable = this._disposables.pop();
-          if (disposable) {
-            disposable.dispose();
-          }
-        }
-      },
-      null,
-      this._disposables
-    );
+  private _dispose() {
+    this._panel.dispose();
+    // Dispose of all disposables (i.e. commands) for the current webview panel
+    // using while loop as disposables might be added while disposing other disposables in the array
+    while (this._disposables.length) {
+      const disposable = this._disposables.pop();
+      if (disposable) {
+        disposable.dispose();
+      }
+    }
+  }
 
-    // message listeners
-    const scope = this._scope;
-    const momento = scope === "Global" ? globalState : workspaceState;
-    const key = prefix;
-    webview.onDidReceiveMessage(
-      (message: MessageType) => {
-        const { action, data, text } = message;
-        switch (action) {
-          case "load":
-            {
-              const data = momento.get(key) || { scope };
-              webview.postMessage({ action: "load", data: { ...data, scope } } as MessageType);
-            }
-            break;
-          case "save":
-            momento.update(key, data);
-            break;
-          case "success":
-          case "info":
-            window.showInformationMessage(text || "");
-            break;
-          case "warn":
-            window.showWarningMessage(text || "");
-            break;
-          case "error":
-            window.showErrorMessage(text || "");
-            break;
+  private _messageHandler(message: MessageType, memento: Memento, key: string, scope: string, webview: Webview) {
+    const { action, data, text } = message;
+    switch (action) {
+      case "load":
+        {
+          const data = memento.get(key) || { scope };
+          webview.postMessage({ action: "load", data: { ...data, scope } } as MessageType);
         }
-      },
-      undefined,
-      this._disposables
-    );
+        break;
+      case "save":
+        memento.update(key, data);
+        break;
+      case "success":
+      case "info":
+        window.showInformationMessage(text || "");
+        break;
+      case "warn":
+        window.showWarningMessage(text || "");
+        break;
+      case "error":
+        window.showErrorMessage(text || "");
+        break;
+    }
   }
 }
