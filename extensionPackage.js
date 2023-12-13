@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import fs from "fs";
 import path from "path";
-import pkg from "./package.json";
 
 /** Following constants should match /extension/constants.ts */
 const scopes = ["Workspace", "Global"];
 export const prefix = "mayank1513.trello-kanban.";
+
+const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf-8"));
 
 const packageJSON = {
   name: "trello-kanban-task-board",
