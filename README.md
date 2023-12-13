@@ -1,4 +1,6 @@
-# Trello Kanban Board [![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board)
+# Trello Kanban Board
+
+[![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/ac44e4371dd3a274285e/maintainability)](https://codeclimate.com/github/mayank1513/vscode-extension-trello-kanban-board/maintainability) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board)
 
 > Organize your work/ideas with Trello like Kanban board!
 
@@ -14,11 +16,9 @@
 
 ✅ Intuitive drag and drop UI
 
+✅ Awailable for web as well - https://vscode-extension-trello-kanban-board.vercel.app/
+
 ## Installation
-
-Click <a href="vscode:extension/mayank1513.trello-kanban-task-board">here</a> to install this extension.
-
-OR
 
 Visit [MarketPlace](https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board)
 

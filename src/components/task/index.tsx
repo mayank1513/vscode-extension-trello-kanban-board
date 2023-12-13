@@ -51,7 +51,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             ref={provided.innerRef}
             {...provided.dragHandleProps}
             {...provided.draggableProps}
-            className={styles.task}>
+            className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
             <textarea
               id={id}
               value={text}

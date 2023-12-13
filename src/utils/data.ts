@@ -1,7 +1,7 @@
 import { BoardType } from "@/interface";
-import { createId } from "@paralleldrive/cuid2";
+import { nanoid } from "nanoid";
 
-const taskId = "task-" + createId();
+const taskId = "task-" + nanoid();
 export const defaultBoard: BoardType = {
   scope: "",
   tasks: {

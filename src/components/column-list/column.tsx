@@ -3,21 +3,37 @@ import styles from "./column-list.module.scss";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "components/task";
 import { useGlobalState } from "utils/context";
-import { createId } from "@paralleldrive/cuid2";
+import { nanoid } from "nanoid";
 import ColumnHeader from "./column-header";
 import { vscode } from "utils/vscode";
+import { useRef } from "react";
 
 export default function Column({ column, index }: { column: ColumnType; index: number }) {
   const { state, setState } = useGlobalState();
+  const listRef = useRef<HTMLUListElement>(null);
   const addTask = () => {
     const newTask: TaskType = {
-      id: createId(),
+      id: nanoid(),
       description: "",
       columnId: column.id,
     };
     column.tasksIds = [...column.tasksIds, newTask.id];
     setState({ ...state, tasks: { ...state.tasks, [newTask.id]: newTask }, columns: [...state.columns] });
     vscode.toast(`New task created in ${column?.title} column!`, "success");
+    setTimeout(() => {
+      // listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+      const newTaskElement = listRef.current?.children[listRef.current.children.length - 1] as HTMLLabelElement;
+      newTaskElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      newTaskElement?.click();
+      setTimeout(() => {
+        newTaskElement?.getElementsByTagName("textarea")[0].focus();
+        newTaskElement?.getElementsByTagName("textarea")[0].click();
+        setTimeout(
+          () => newTaskElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" }),
+          100
+        );
+      }, 50);
+    }, 250);
   };
   return (
     <Draggable draggableId={column.id} index={index}>
@@ -33,12 +49,12 @@ export default function Column({ column, index }: { column: ColumnType; index: n
                 <div className={styles.column}>
                   <ColumnHeader column={column} {...provided.dragHandleProps} />
                   <hr />
-                  <div className={styles.taskList}>
+                  <ul className={styles.taskList} ref={listRef}>
                     {column.tasksIds.map((taskId, index) => (
                       <Task key={taskId} task={state.tasks[taskId]} index={index} />
                     ))}
                     {provided1.placeholder}
-                  </div>
+                  </ul>
                   <button className={styles.addTask} onClick={addTask}>
                     Add Task
                   </button>

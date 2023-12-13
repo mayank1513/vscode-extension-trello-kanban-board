@@ -1,0 +1,23 @@
+.drawer {
+  transition: all 0.3s;
+  width: 0;
+  opacity: 0;
+  box-shadow: 0 5px 5px gray;
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+  a {
+    padding: 20px;
+    display: block;
+    color: inherit;
+    font-weight: 500;
+    &:hover {
+      box-shadow: 0 0 5px gray;
+    }
+  }
+}
+.open {
+  width: 320px;
+  opacity: 1;
+}

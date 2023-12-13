@@ -10,6 +10,7 @@
   textarea {
     width: calc(100% - 10px);
     resize: none;
+    border-radius: 2px;
   }
   * {
     margin: 2px 0;
@@ -20,6 +21,9 @@
   &:hover .close {
     display: block;
   }
+}
+.active {
+  box-shadow: 0 0 5px red;
 }
 .placeholder {
   opacity: 0.5;

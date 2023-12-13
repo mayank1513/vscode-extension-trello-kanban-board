@@ -37,10 +37,10 @@
   opacity: 0.5;
 }
 .addTask {
-  margin: 5px;
+  margin: 0 5px;
   width: calc(100% - 10px);
   cursor: pointer;
-  padding: 5px;
+  padding: 3px 5px;
 }
 .addColumn {
   margin: 10px;
@@ -52,7 +52,8 @@
 .taskList {
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: calc(100vh - 180px);
+  max-height: calc(100vh - 200px);
+  padding: 0;
 }
 .close {
   display: none;
