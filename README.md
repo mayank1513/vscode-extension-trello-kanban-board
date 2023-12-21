@@ -1,6 +1,6 @@
 # Trello Kanban Board
 
-[![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/ac44e4371dd3a274285e/maintainability)](https://codeclimate.com/github/mayank1513/vscode-extension-trello-kanban-board/maintainability) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board)
+![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/mayank1513.trello-kanban-task-board) [![test](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/ac44e4371dd3a274285e/maintainability)](https://codeclimate.com/github/mayank1513/vscode-extension-trello-kanban-board/maintainability) [![codecov](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg)](https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mayank1513.trello-kanban-task-board)
 
 > Organize your work/ideas with Trello like Kanban board!
 
