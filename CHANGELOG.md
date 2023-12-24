@@ -1,5 +1,11 @@
 # trello-kanban-task-board
 
+## 0.2.0
+
+### Minor Changes
+
+- Fix activationEvents; Touched up drawer
+
 ## 0.1.2
 
 ### Patch Changes
