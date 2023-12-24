@@ -8,23 +8,23 @@ const viewButtons: Record<ScopeType, StatusBarItem | null> = {
 };
 
 export function activate(context: ExtensionContext) {
-  scopes.forEach((scope) => {
-    const command = prefix + scope;
-
-    context.subscriptions.push(commands.registerCommand(command, () => Panel.render(context, scope)));
-    window.registerWebviewPanelSerializer(command, {
-      async deserializeWebviewPanel(webviewPanel) {
-        try {
-          Panel.revive(webviewPanel, context, scope);
-        } catch (e) {
-          Panel.render(context, scope);
-        }
-      },
-    });
-
-    createStatusBarButton(context, scope);
-  });
+  scopes.forEach((scope) => registerCommandAndPanelSerializer(context, scope));
+  scopes.forEach((scope) => createStatusBarButton(context, scope));
   listenConfigChange(context);
+}
+
+function registerCommandAndPanelSerializer(context: ExtensionContext, scope: ScopeType) {
+  const command = prefix + scope;
+  context.subscriptions.push(commands.registerCommand(command, () => Panel.render(context, scope)));
+  window.registerWebviewPanelSerializer(command, {
+    async deserializeWebviewPanel(webviewPanel) {
+      try {
+        Panel.revive(webviewPanel, context, scope);
+      } catch (e) {
+        Panel.render(context, scope);
+      }
+    },
+  });
 }
 
 function listenConfigChange(context: ExtensionContext) {
