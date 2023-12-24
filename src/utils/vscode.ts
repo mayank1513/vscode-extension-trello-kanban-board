@@ -1,5 +1,5 @@
 import type { WebviewApi } from "vscode-webview";
-import type { BoardType, MessageType } from "@/interface";
+import type { BoardType, MessageType, ScopeType } from "@/interface";
 import { defaultBoard } from "./data";
 import { toast as _toast } from "react-toastify";
 
@@ -25,6 +25,10 @@ class VSCodeAPIWrapper {
     else _toast("Open Settings", { type: "info" });
   }
 
+  public showPanel(scope: ScopeType) {
+    if (this.vsCodeApi) this._postMessage({ action: "showPanel" });
+    else _toast(`Open TKB(${scope})`, { type: "info" });
+  }
   /**
    * Get the persistent state stored for this webview.
    *

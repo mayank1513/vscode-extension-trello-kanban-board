@@ -1,5 +1,6 @@
+export * from "./constants";
 export interface MessageType {
-  action: "save" | "load" | "info" | "warn" | "error" | "success" | "settings";
+  action: "save" | "load" | "info" | "warn" | "error" | "success" | "settings" | "showPanel";
   data?: BoardType;
   text?: string;
 }

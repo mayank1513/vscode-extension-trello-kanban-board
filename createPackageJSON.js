@@ -66,6 +66,8 @@ const packageJSON = {
   engines: {
     vscode: "^1.75.0",
   },
+  license: "MIT",
+  categories: ["Visualization", "Notebooks", "Other"],
   repository: {
     type: "git",
     url: "https://github.com/mayank1513/vscode-extension-trello-kanban-board",
@@ -84,11 +86,11 @@ const packageJSON = {
       properties: configs,
     },
   },
-  activationEvents: scopes.map((scope) => `onWebviewPanel:${prefix}${scope}`),
+  activationEvents: ["onStartupFinished"],
   sponsor: {
     url: "https://github.com/sponsors/mayank1513",
   },
-  license: "MIT",
+  keywords: pkg.keywords,
 };
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));

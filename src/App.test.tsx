@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, test } from "vitest";
 import boardStyles from "./components/board.module.scss";
 import taskStyles from "./components/task/task.module.scss";
 import columnListStyles from "./components/column-list/column-list.module.scss";
+import Drawer from "components/drawer";
 
 describe("Test Board", () => {
   afterEach(cleanup);
@@ -88,5 +89,24 @@ describe("Test Board", () => {
     act(() => fireEvent.input(inputEl, { target: { value: "Task 1" } }));
     act(() => fireEvent.blur(inputEl));
     expect(taskEl.textContent).toContain("Task 1");
+  });
+
+  test("Drawer", ({ expect }) => {
+    render(<Drawer open scope="Global" />);
+    act(() => fireEvent.click(screen.getByText("⚙")));
+    expect(screen.getByText("Settings")).toBeDefined();
+  });
+  test("Drawer -> Global", ({ expect }) => {
+    render(<Drawer open scope="Global" />);
+    const el = screen.getByText("📋 Open TKB (Workspace)");
+    expect(el).toBeDefined();
+    act(() => fireEvent.click(el));
+  });
+
+  test("Drawer -> Workspace", ({ expect }) => {
+    render(<Drawer open scope="Workspace" />);
+    const el = screen.getByText("📋 Open TKB (Global)");
+    expect(el).toBeDefined();
+    act(() => fireEvent.click(el));
   });
 });
