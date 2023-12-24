@@ -48,5 +48,21 @@
     "vite": "^5.0.8",
     "vite-tsconfig-paths": "^4.2.2",
     "vitest": "^1.0.4"
-  }
+  },
+  "keywords": [
+    "project-management",
+    "productivity",
+    "agile",
+    "scrum",
+    "sprint",
+    "drag-and-drop",
+    "Global Scope",
+    "Workspace Scope",
+    "trello",
+    "kanban",
+    "board",
+    "project",
+    "management",
+    "todo-list"
+  ]
 }
