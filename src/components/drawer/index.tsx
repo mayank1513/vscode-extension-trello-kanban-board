@@ -1,9 +1,10 @@
 import { vscode } from "utils/vscode";
 import styles from "./drawer.module.scss";
+import { MouseEventHandler } from "react";
 
 const links = [
   {
-    text: "🌟 Rate me on VSCode Marketplace",
+    text: "🌟 Rate me on Marketplace",
     href: "https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board",
   },
   { text: "🌏 Web Version", href: "https://vscode-extension-trello-kanban-board.vercel.app/" },
@@ -12,10 +13,11 @@ const links = [
   { text: "🤝 Get in touch", href: "https://mayank-chaudhari.vercel.app/" },
 ];
 
-export default function Drawer({ open, isBrowser }: { open: boolean; isBrowser: boolean }) {
+export default function Drawer({ open, scope }: { open: boolean; scope: string }) {
   return (
     <aside className={[styles.drawer, open ? styles.open : ""].join(" ")}>
       <ul>
+        {scope !== "Browser" && <ExtensionOnlyUI scope={scope} />}
         {links.map(({ text, href }) => (
           <li key={href}>
             <a href={href} target="_blank">
@@ -23,18 +25,44 @@ export default function Drawer({ open, isBrowser }: { open: boolean; isBrowser: 
             </a>
           </li>
         ))}
-        {!isBrowser && (
-          <li>
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-                vscode.openSettings();
-              }}>
-              ⚙ Settings
-            </a>
-          </li>
-        )}
       </ul>
     </aside>
+  );
+}
+
+/** Keeping this funciton outside is Equivalent to useCallback */
+const openSettings: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  e.preventDefault();
+  vscode.openSettings();
+};
+
+const showGlobalPanel: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  e.preventDefault();
+  vscode.showPanel("Global");
+};
+
+const showWorkspacePanel: MouseEventHandler<HTMLAnchorElement> = (e) => {
+  e.preventDefault();
+  vscode.showPanel("Workspace");
+};
+
+function ExtensionOnlyUI({ scope }: { scope: string }) {
+  return (
+    <>
+      <li>
+        <a onClick={openSettings}>
+          <b>⚙</b> Settings
+        </a>
+      </li>
+      {scope === "Global" ? (
+        <li>
+          <a onClick={showWorkspacePanel}>📋 Open TKB (Workspace)</a>
+        </li>
+      ) : (
+        <li>
+          <a onClick={showGlobalPanel}>📋 Open TKB (Global)</a>
+        </li>
+      )}
+    </>
   );
 }

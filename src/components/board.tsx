@@ -14,7 +14,6 @@ export default function Board() {
   const [open, setOpen] = useState(false);
 
   const onDragEnd = (result: DropResult) => handleDragEnd(result, state, setState);
-  const isBrowser = state.scope === "Browser";
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={[styles.board, styles.dark].join(" ")}>
@@ -24,10 +23,10 @@ export default function Board() {
           <hr />
         </header>
         <main className={styles.main}>
-          <Drawer open={open} isBrowser={isBrowser} />
+          <Drawer open={open} scope={state.scope} />
           <ColumnList columns={state.columns} />
         </main>
-        {isBrowser && <BrowserOnlyUI />}
+        {state.scope === "Browser" && <BrowserOnlyUI />}
       </div>
     </DragDropContext>
   );

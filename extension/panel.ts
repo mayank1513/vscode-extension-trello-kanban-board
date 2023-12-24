@@ -117,6 +117,9 @@ export class Panel {
       case "settings":
         commands.executeCommand("workbench.action.openSettings", "mayank1513.trello-kanban-task-board");
         break;
+      case "showPanel":
+        commands.executeCommand(prefix + (scope === "Global" ? "Workspace" : "Global"));
+        break;
     }
   }
 }

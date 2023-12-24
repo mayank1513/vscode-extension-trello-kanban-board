@@ -15,9 +15,17 @@
     color: inherit;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.3s;
     &:hover {
       box-shadow: 0 0 5px gray;
+      letter-spacing: 1px;
+      padding: 22px 20px;
+      font-size: 1.2em;
     }
+  }
+  b {
+    font-size: 1.2em;
+    padding-right: 5px;
   }
 }
 .open {
