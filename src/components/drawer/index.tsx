@@ -5,7 +5,7 @@ import { MouseEventHandler } from "react";
 const links = [
   {
     text: "🌟 Rate me on Marketplace",
-    href: "https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board",
+    href: "https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board&ssr=false#review-details",
   },
   { text: "🌏 Web Version", href: "https://vscode-extension-trello-kanban-board.vercel.app/" },
   { text: "🌟 Star/Fork me on GitHub", href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board" },
