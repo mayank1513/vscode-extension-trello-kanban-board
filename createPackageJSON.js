@@ -58,8 +58,8 @@ scopes.forEach((scope) => {
 
 const packageJSON = {
   name: pkg.name,
-  displayName: "Trello like kanban board",
-  description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
+  displayName: "Trello Kanban Board",
+  description: "Simple trello like kanban board for Visual Studio Code. Visually organize your ideas!",
   version: pkg.version,
   publisher: "mayank1513",
   icon: "logo.png",
@@ -67,6 +67,10 @@ const packageJSON = {
     vscode: "^1.75.0",
   },
   license: "MIT",
+  author: {
+    name: "Mayank Kumar Chaudhari",
+    url: "https://mayank-chaudhari.vercel.app/",
+  },
   categories: ["Visualization", "Notebooks", "Other"],
   repository: {
     type: "git",
