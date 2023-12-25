@@ -58,6 +58,8 @@
     "drag-and-drop",
     "Global Scope",
     "Workspace Scope",
+    "markdown",
+    "markdown-supported",
     "trello",
     "kanban",
     "board",

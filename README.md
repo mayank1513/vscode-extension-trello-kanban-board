@@ -6,40 +6,50 @@
 
 ![Demo](trello-kanabn.gif)
 
-✅ Supports Markdown - create task description in markdown
+✅ Supports Markdown - create task description in Markdown
 
 ✅ Drag and rearrange tasks and lists
 
-✅ Use gloabl board for worspace independent tasks
+✅ Use global board for workspace independent tasks
 
 ✅ Use workspace board specific to the workspace to manage the workspace without clutter
 
-✅ Intuitive drag and drop UI
+✅ Intuitive drag-and-drop UI
 
-✅ Awailable for web as well - https://vscode-extension-trello-kanban-board.vercel.app/
+✅ Available for web as well - https://vscode-extension-trello-kanban-board.vercel.app/
 
 ## Installation
 
-Visit [MarketPlace](https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board)
+Install from [VSCode MarketPlace](https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board) or [Our Website](https://vscode-extension-trello-kanban-board.vercel.app/)
 
-OR
+~ OR ~
 
-Search for `trello-kanban-task-board` and install from extensions panel.
+Search for `trello-kanban-task-board` and install it from the extensions panel in VS Code.
 
-OR
+~ OR ~
 
-enter and run following command in Command Pallete by pressing `(ctrl+shift+P)`
+Open the command palette by pressing `(ctrl+shift+P)` or `F1` and enter the following command:
 
-```
+```bash
 ext install trello-kanban-task-board
 ```
 
 ## Usage
 
-`TrelloKanban` offers a global kanban board and a workspace kanban board for each workspace.
+`TrelloKanban` offers a global Kanban board and a workspace Kanban board for each workspace.
 
-1. Open the Command Pallete by pressing `(ctrl+shift+P)`
-2. Select `TrelloKanban: Workspace` or `TrelloKanban: Global` for workspace or global board respectively
+1. Open the Command Palette by pressing `(ctrl+shift+P)` or `F1`
+
+2. Type `Trello` or `Kanban` or the full command from the table below
+
+3. Select `TrelloKanban: Workspace` or `TrelloKanban: Global` for workspace or global board respectively
+
+   | Name                    | Description                                                  |
+   | ----------------------- | ------------------------------------------------------------ |
+   | TrelloKanban: Workspace | Opens Kanban Board linked to current workspace (folder)      |
+   | TrelloKanban: Global    | Opens global Kanban Board (Not linked to any specific workspace) |
+
+   
 
 # Contribute
 
@@ -48,13 +58,13 @@ You can contribute by creating issues and PRs or by sponsoring my work.
 1. Report [issues/bugs](https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues)
 2. Join [discussions](https://github.com/mayank1513/vscode-extension-trello-kanban-board/discussions)
 3. Star and Fork the [repo](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
-4. Sponsore - [GitHub Sponsor](https://github.com/sponsors/mayank1513) Or [RazorPay](https://pages.razorpay.com/mayank1513)
+4. Sponsor - [GitHub Sponsor](https://github.com/sponsors/mayank1513) Or [Razorpay](https://pages.razorpay.com/mayank1513)
 
-### [🤩 Don't forger to start this repo!](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
+### [🤩 Don't forget to start this repo!](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
 
 [💖](https://github.com/mayank1513/vscode-extension-trello-kanban-board) [🌟](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
 
-Want handson course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://www.udemy.com/course/react-and-next-js-with-typescript/?referralCode=7202184A1E57C3DCA8B2) and [The Game of Chess with Next.js, React and TypeScrypt](https://www.udemy.com/course/game-of-chess-with-nextjs-react-and-typescrypt/?referralCode=851A28F10B254A8523FE)
+Want a hands-on course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://www.udemy.com/course/react-and-next-js-with-typescript/?referralCode=7202184A1E57C3DCA8B2) and [The Game of Chess with Next.js, React and TypeScrypt](https://www.udemy.com/course/game-of-chess-with-nextjs-react-and-typescrypt/?referralCode=851A28F10B254A8523FE)
 
 ![Alt](https://repobeats.axiom.co/api/embed/8aced6446b2124d2b592d67a91a1ad4a90aabbb6.svg "Repobeats analytics image")
 
