@@ -91,6 +91,23 @@ const packageJSON = {
     url: "https://github.com/sponsors/mayank1513",
   },
   keywords: pkg.keywords,
+  badges: [
+    {
+      description: "Test",
+      url: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml/badge.svg",
+      href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml",
+    },
+    {
+      description: "Maintainability",
+      url: "https://api.codeclimate.com/v1/badges/ac44e4371dd3a274285e/maintainability",
+      href: "https://codeclimate.com/github/mayank1513/vscode-extension-trello-kanban-board/maintainability",
+    },
+    {
+      description: "PayPal Donate",
+      url: "https://img.shields.io/badge/paypal-donate-blue.svg",
+      href: "https://paypal.me/mayank1513",
+    },
+  ],
 };
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJSON, null, 2));
