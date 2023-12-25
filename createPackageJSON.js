@@ -116,5 +116,9 @@ const readMe = fs.readFileSync(path.resolve(process.cwd(), "README.md"), "utf-8"
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "README.md"), readMe.replace(/.*\.svg.*/g, "")); // remove lines with .svg
 fs.copyFileSync(path.resolve(process.cwd(), "LICENSE"), path.resolve(process.cwd(), "dist", "LICENSE"));
-
-fs.unlinkSync(path.resolve(process.cwd(), "dist", "index.html"));
+fs.copyFileSync(path.resolve(process.cwd(), "CHANGELOG.md"), path.resolve(process.cwd(), "dist", "CHANGELOG.md"));
+try {
+  fs.unlinkSync(path.resolve(process.cwd(), "dist", "index.html"));
+} catch {
+  // ignore - index.html may not exist when we are building only extension multiple times without building the frontend
+}
