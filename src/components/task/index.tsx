@@ -33,9 +33,8 @@ export default function Task({ task, index }: { task: TaskType; index: number })
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => {
-        if (snapshot.isDragging && provided.draggableProps.style?.transform) {
+        if (snapshot.isDragging && provided.draggableProps.style?.transform)
           provided.draggableProps.style.transform += " rotate(5deg)";
-        }
         return (
           <label
             onClick={() => {
