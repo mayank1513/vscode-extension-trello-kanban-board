@@ -58,8 +58,8 @@ scopes.forEach((scope) => {
 
 const packageJSON = {
   name: pkg.name,
-  displayName: "Trello like kanban board",
-  description: "Simple trello like kanban board for VS Code. Visually organize your ideas!",
+  displayName: "Trello Kanban Board",
+  description: "Simple trello like kanban board for Visual Studio Code. Visually organize your ideas!",
   version: pkg.version,
   publisher: "mayank1513",
   icon: "logo.png",
@@ -67,6 +67,10 @@ const packageJSON = {
     vscode: "^1.75.0",
   },
   license: "MIT",
+  author: {
+    name: "Mayank Kumar Chaudhari",
+    url: "https://mayank-chaudhari.vercel.app/",
+  },
   categories: ["Visualization", "Notebooks", "Other"],
   repository: {
     type: "git",
@@ -116,5 +120,9 @@ const readMe = fs.readFileSync(path.resolve(process.cwd(), "README.md"), "utf-8"
 
 fs.writeFileSync(path.resolve(process.cwd(), "dist", "README.md"), readMe.replace(/.*\.svg.*/g, "")); // remove lines with .svg
 fs.copyFileSync(path.resolve(process.cwd(), "LICENSE"), path.resolve(process.cwd(), "dist", "LICENSE"));
-
-fs.unlinkSync(path.resolve(process.cwd(), "dist", "index.html"));
+fs.copyFileSync(path.resolve(process.cwd(), "CHANGELOG.md"), path.resolve(process.cwd(), "dist", "CHANGELOG.md"));
+try {
+  fs.unlinkSync(path.resolve(process.cwd(), "dist", "index.html"));
+} catch {
+  // ignore - index.html may not exist when we are building only extension multiple times without building the frontend
+}
