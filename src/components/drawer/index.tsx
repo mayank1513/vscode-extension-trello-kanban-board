@@ -8,6 +8,18 @@ const links = [
     href: "https://marketplace.visualstudio.com/items?itemName=mayank1513.trello-kanban-task-board&ssr=false#review-details",
   },
   { text: "🌏 Web Version", href: "https://vscode-extension-trello-kanban-board.vercel.app/" },
+  {
+    text: "🤝 Request new features",
+    href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=",
+  },
+  {
+    text: "💬 Ask question/discuss ideas",
+    href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/discussions/categories/q-a",
+  },
+  {
+    text: "📝 Report a bug",
+    href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues/new?assignees=&labels=&projects=&template=bug_report.md&title=",
+  },
   { text: "🌟 Star/Fork me on GitHub", href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board" },
   { text: "📖 Learn", href: "https://mayank-chaudhari.vercel.app/courses" },
   { text: "🤝 Get in touch", href: "https://mayank-chaudhari.vercel.app/" },
