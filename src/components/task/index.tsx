@@ -1,29 +1,24 @@
 import { TaskType } from "@/interface";
-import { useId, useRef, useState } from "react";
+import { RefObject, useId, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import ReactMarkdown from "react-markdown";
 import { useGlobalState } from "utils/context";
 import styles from "./task.module.scss";
 import { vscode } from "utils/vscode";
 
+function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
+  const target = textareaRef.current;
+  if (!target) return;
+  target.style.height = "auto";
+  target.style.height = `${target.scrollHeight}px`;
+}
+
 export default function Task({ task, index }: { task: TaskType; index: number }) {
   const { state, setState } = useGlobalState();
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(task.description);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const id = useId();
-  const onBlur = () => {
-    task.description = text.replace(/ +/, " ").replace(/\n+/g, "\n\n");
-    setText(task.description);
-    setState({ ...state, tasks: { ...state.tasks } });
-    setIsEditing(false);
-  };
-  const resizeTextArea = () => {
-    const target = textareaRef.current;
-    if (!target) return;
-    target.style.height = "auto";
-    target.style.height = `${target.scrollHeight}px`;
-  };
+
   const removeTask = () => {
     const tasks = { ...state.tasks };
     delete tasks[task.id];
@@ -45,9 +40,11 @@ export default function Task({ task, index }: { task: TaskType; index: number })
           <label
             onClick={() => {
               setIsEditing(true);
-              resizeTextArea();
-              setText(text + " ");
-              setTimeout(() => setText(text.trim()), 0);
+              resizeTextArea(textareaRef);
+              if (textareaRef.current?.value) {
+                textareaRef.current.value = "hk";
+                textareaRef.current.value = task.description;
+              }
             }}
             htmlFor={id}
             ref={provided.innerRef}
@@ -56,13 +53,14 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
             <textarea
               id={id}
-              value={text}
+              value={task.description}
               ref={textareaRef}
               onChange={(e) => {
-                setText(e.target.value);
-                resizeTextArea();
+                task.description = e.target.value.replace(/ +/, " ").replace(/\n+/g, "\n");
+                setState({ ...state, tasks: { ...state.tasks } });
+                resizeTextArea(textareaRef);
               }}
-              onBlur={onBlur}
+              onBlur={() => setIsEditing(false)}
               placeholder="Enter task description in Markdown format"
               hidden={!isEditing}
             />
@@ -71,7 +69,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             </span>
             {!isEditing &&
               (task.description.trim() ? (
-                <ReactMarkdown>{task.description}</ReactMarkdown>
+                <ReactMarkdown>{task.description.replace(/\n+/g, "\n\n")}</ReactMarkdown>
               ) : (
                 <p className={styles.placeholder}>Enter task description in Markdown format.</p>
               ))}
