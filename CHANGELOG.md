@@ -1,5 +1,15 @@
 # Trello Kanban Board
 
+## 0.3.0
+
+### Minor Changes
+
+- Add links to bugs, enhancements, etc. Fix minor issues and suggestions
+
+### Patch Changes
+
+- 077e580: Add changeset to release
+
 ## 0.2.1
 
 ### Patch Changes
