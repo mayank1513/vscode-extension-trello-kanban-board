@@ -46,6 +46,8 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             onClick={() => {
               setIsEditing(true);
               resizeTextArea();
+              setText(text + " ");
+              setTimeout(() => setText(text.trim()), 0);
             }}
             htmlFor={id}
             ref={provided.innerRef}
