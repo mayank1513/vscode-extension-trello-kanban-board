@@ -67,12 +67,11 @@ describe("Test Board", () => {
   test("Move task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
-    // simulate dragging
-    act(() => fireEvent.mouseDown(taskEl, { clientX: 0, clientY: 0 }));
-    for (let i = 0; i < 20; i++) {
-      act(() => fireEvent.mouseMove(taskEl, { clientX: (i * 350) / 20, clientY: (i * 510) / 20 }));
-    }
-    act(() => fireEvent.mouseUp(taskEl));
+    // simulate dragging -- not very effective
+    act(() => fireEvent.mouseDown(taskEl, { clientX: 100, clientY: 150 }));
+    act(() => fireEvent.mouseMove(taskEl, { clientX: 450, clientY: 500 }));
+    act(() => fireEvent.mouseMove(taskEl, { clientX: 650, clientY: 300 }));
+    act(() => fireEvent.mouseUp(taskEl, { clientX: 650, clientY: 300 }));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
   });
 
