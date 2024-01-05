@@ -5,6 +5,7 @@ import boardStyles from "./components/board.module.scss";
 import taskStyles from "./components/task/task.module.scss";
 import columnListStyles from "./components/column-list/column-list.module.scss";
 import Drawer from "components/drawer";
+import { scrollIntoViewMock } from "../vitest.setup";
 
 describe("Test Board", () => {
   afterEach(cleanup);
@@ -13,7 +14,6 @@ describe("Test Board", () => {
   });
   test("Board Header", ({ expect }) => {
     const header = screen.getByTestId("board-header");
-    console.log(header.textContent);
     expect(header.textContent).toContain("Trello Kanban Board");
     expect(header.className).toBe(boardStyles.header);
   });
@@ -55,10 +55,12 @@ describe("Test Board", () => {
     expect(screen.queryByTestId("column-3")).not.toBeInTheDocument();
   });
 
-  test("Create a new task", ({ expect }) => {
+  test("Create a new task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     act(() => fireEvent.click(columnEl.getElementsByTagName("button")[0]));
+    await new Promise((resolve) => setTimeout(resolve, 400));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
+    expect(scrollIntoViewMock).toBeCalled();
   });
 
   /** Todo: drop on another column or position */
@@ -92,19 +94,19 @@ describe("Test Board", () => {
   });
 
   test("Drawer", ({ expect }) => {
-    render(<Drawer open scope="Global" />);
+    act(() => render(<Drawer open scope="Global" />));
     act(() => fireEvent.click(screen.getByText("⚙")));
     expect(screen.getByText("Settings")).toBeDefined();
   });
   test("Drawer -> Global", ({ expect }) => {
-    render(<Drawer open scope="Global" />);
+    act(() => render(<Drawer open scope="Global" />));
     const el = screen.getByText("📋 Open TKB (Workspace)");
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));
   });
 
   test("Drawer -> Workspace", ({ expect }) => {
-    render(<Drawer open scope="Workspace" />);
+    act(() => render(<Drawer open scope="Workspace" />));
     const el = screen.getByText("📋 Open TKB (Global)");
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));
