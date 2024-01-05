@@ -1,10 +1,14 @@
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import App from "App";
-import { afterEach, beforeEach, describe, test } from "vitest";
+import { afterEach, beforeEach, describe, test, vi } from "vitest";
 import boardStyles from "./components/board.module.scss";
 import taskStyles from "./components/task/task.module.scss";
 import columnListStyles from "./components/column-list/column-list.module.scss";
 import Drawer from "components/drawer";
+import { scrollIntoViewMock } from "../vitest.setup";
+import { handleDragEnd } from "utils/drag";
+import { defaultBoard, taskId } from "utils/data";
+import { DropReason } from "react-beautiful-dnd";
 
 describe("Test Board", () => {
   afterEach(cleanup);
@@ -13,7 +17,6 @@ describe("Test Board", () => {
   });
   test("Board Header", ({ expect }) => {
     const header = screen.getByTestId("board-header");
-    console.log(header.textContent);
     expect(header.textContent).toContain("Trello Kanban Board");
     expect(header.className).toBe(boardStyles.header);
   });
@@ -55,23 +58,78 @@ describe("Test Board", () => {
     expect(screen.queryByTestId("column-3")).not.toBeInTheDocument();
   });
 
-  test("Create a new task", ({ expect }) => {
+  test("Create a new task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     act(() => fireEvent.click(columnEl.getElementsByTagName("button")[0]));
+    await new Promise((resolve) => setTimeout(resolve, 400));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
+    expect(scrollIntoViewMock).toBeCalled();
   });
 
   /** Todo: drop on another column or position */
   test("Move task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
-    // simulate dragging
-    act(() => fireEvent.mouseDown(taskEl, { clientX: 0, clientY: 0 }));
-    for (let i = 0; i < 20; i++) {
-      act(() => fireEvent.mouseMove(taskEl, { clientX: (i * 350) / 20, clientY: (i * 510) / 20 }));
-    }
-    act(() => fireEvent.mouseUp(taskEl));
+    // simulate dragging -- not very effective
+    act(() => fireEvent.mouseDown(taskEl, { clientX: 100, clientY: 150 }));
+    act(() => fireEvent.mouseMove(taskEl, { clientX: 450, clientY: 500 }));
+    act(() => fireEvent.mouseMove(taskEl, { clientX: 650, clientY: 300 }));
+    act(() => fireEvent.mouseUp(taskEl, { clientX: 650, clientY: 300 }));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
+  });
+
+  test("handleDragEnd - move task", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "column-todo", index: 0 },
+        destination: { droppableId: "column-doing", index: 0 },
+        draggableId: taskId,
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
+  });
+
+  test("handleDragEnd - move task out of range", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "column-todo", index: 0 },
+        destination: { droppableId: "columns", index: 5 },
+        draggableId: taskId,
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
+  });
+
+  test("handleDragEnd - move column", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "columns", index: 0 },
+        destination: { droppableId: "columns", index: 1 },
+        draggableId: "column-todo",
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
   });
 
   test("Remove task", async ({ expect }) => {
@@ -92,19 +150,19 @@ describe("Test Board", () => {
   });
 
   test("Drawer", ({ expect }) => {
-    render(<Drawer open scope="Global" />);
+    act(() => render(<Drawer open scope="Global" />));
     act(() => fireEvent.click(screen.getByText("⚙")));
     expect(screen.getByText("Settings")).toBeDefined();
   });
   test("Drawer -> Global", ({ expect }) => {
-    render(<Drawer open scope="Global" />);
+    act(() => render(<Drawer open scope="Global" />));
     const el = screen.getByText("📋 Open TKB (Workspace)");
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));
   });
 
   test("Drawer -> Workspace", ({ expect }) => {
-    render(<Drawer open scope="Workspace" />);
+    act(() => render(<Drawer open scope="Workspace" />));
     const el = screen.getByText("📋 Open TKB (Global)");
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));

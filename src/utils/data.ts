@@ -1,7 +1,7 @@
 import { BoardType } from "@/interface";
 import { nanoid } from "nanoid";
 
-const taskId = "task-" + nanoid();
+export const taskId = "task-" + nanoid();
 export const defaultBoard: BoardType = {
   scope: "",
   tasks: {
