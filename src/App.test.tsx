@@ -1,11 +1,14 @@
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import App from "App";
-import { afterEach, beforeEach, describe, test } from "vitest";
+import { afterEach, beforeEach, describe, test, vi } from "vitest";
 import boardStyles from "./components/board.module.scss";
 import taskStyles from "./components/task/task.module.scss";
 import columnListStyles from "./components/column-list/column-list.module.scss";
 import Drawer from "components/drawer";
 import { scrollIntoViewMock } from "../vitest.setup";
+import { handleDragEnd } from "utils/drag";
+import { defaultBoard, taskId } from "utils/data";
+import { DropReason } from "react-beautiful-dnd";
 
 describe("Test Board", () => {
   afterEach(cleanup);
@@ -73,6 +76,60 @@ describe("Test Board", () => {
     act(() => fireEvent.mouseMove(taskEl, { clientX: 650, clientY: 300 }));
     act(() => fireEvent.mouseUp(taskEl, { clientX: 650, clientY: 300 }));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
+  });
+
+  test("handleDragEnd - move task", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "column-todo", index: 0 },
+        destination: { droppableId: "column-doing", index: 0 },
+        draggableId: taskId,
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
+  });
+
+  test("handleDragEnd - move task out of range", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "column-todo", index: 0 },
+        destination: { droppableId: "columns", index: 5 },
+        draggableId: taskId,
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
+  });
+
+  test("handleDragEnd - move column", async ({ expect }) => {
+    const setStateFn = vi.fn();
+    handleDragEnd(
+      {
+        source: { droppableId: "columns", index: 0 },
+        destination: { droppableId: "columns", index: 1 },
+        draggableId: "column-todo",
+        reason: "DROP" as DropReason,
+        type: "DEFAULT",
+        mode: "FLUID",
+        combine: null,
+      },
+      JSON.parse(JSON.stringify(defaultBoard)),
+      setStateFn
+    );
+    expect(setStateFn).toBeCalled();
   });
 
   test("Remove task", async ({ expect }) => {
