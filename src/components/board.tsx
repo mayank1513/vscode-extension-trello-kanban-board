@@ -8,6 +8,7 @@ import DrawerToggle from "./drawer-toggle";
 import { useState } from "react";
 import Drawer from "./drawer";
 import { handleDragEnd } from "utils/drag";
+import { ColorSwitch } from "nextjs-themes";
 
 export default function Board() {
   const { state, setState } = useGlobalState();
@@ -35,6 +36,9 @@ export default function Board() {
 function BrowserOnlyUI() {
   return (
     <>
+      <div className={styles.colorSwitch}>
+        <ColorSwitch />
+      </div>
       <ForkMe
         gitHubUrl="https://github.com/mayank1513/vscode-extension-trello-kanban-board"
         noAutoFork

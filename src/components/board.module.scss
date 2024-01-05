@@ -50,3 +50,10 @@
     box-shadow: -2px -2px 5px inset #555;
   }
 }
+
+.colorSwitch {
+  position: fixed;
+  top: 10px;
+  right: 200px;
+  z-index: 1000;
+}
