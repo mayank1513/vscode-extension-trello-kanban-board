@@ -102,6 +102,11 @@ const packageJSON = {
       href: "https://github.com/mayank1513/vscode-extension-trello-kanban-board/actions/workflows/test.yml",
     },
     {
+      description: "Coverage",
+      url: "https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board/graph/badge.svg",
+      href: "https://codecov.io/gh/mayank1513/vscode-extension-trello-kanban-board",
+    },
+    {
       description: "Maintainability",
       url: "https://api.codeclimate.com/v1/badges/ac44e4371dd3a274285e/maintainability",
       href: "https://codeclimate.com/github/mayank1513/vscode-extension-trello-kanban-board/maintainability",
