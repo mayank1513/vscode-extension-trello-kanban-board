@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.4.0
+
+### Minor Changes
+
+- 118eaaa: Add theme-switcher
+
 ## 0.3.0
 
 ### Minor Changes
