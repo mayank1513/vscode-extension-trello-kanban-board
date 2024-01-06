@@ -1,11 +1,10 @@
+@import "nextjs-themes/styles";
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   --bg: var(--vscode-editor-background, #242424);
-
-  color: var(--vscode-editor-foreground, rgba(255, 255, 255, 0.87));
-  background-color: var(--bg);
+  --fg: var(--vscode-editor-foreground, rgba(255, 255, 255, 0.87));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,6 +17,13 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+.Browser {
+  color: var(--fg);
+  background-color: var(--bg);
 }
 
 * {
@@ -41,9 +47,19 @@ a {
 [hidden] {
   display: none !important;
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--vscode-editor-foreground, #213547);
-    --bg: var(--vscode-editor-background, #fff);
-  }
+
+.light,
+.light .Browser {
+  --fg: #213547;
+  --bg: #fff;
+}
+.dark,
+.dark .Browser {
+  --bg: #242424;
+  --fg: rgba(255, 255, 255, 0.87);
+}
+
+[data-csp="system"] {
+  --bg: var(--vscode-editor-background);
+  --fg: var(--vscode-editor-foreground);
 }

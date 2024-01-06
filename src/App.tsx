@@ -6,6 +6,7 @@ import Board from "components/board";
 import { GlobalContext } from "utils/context";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ThemeSwitcher } from "nextjs-themes";
 
 function App() {
   const [state, _setState] = useState<BoardType>(defaultBoard);
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ state, setState }}>
+      <ThemeSwitcher storage="localStorage" themeTransition="all .3s" />
       <Board />
       <ToastContainer position="bottom-right" />
     </GlobalContext.Provider>
