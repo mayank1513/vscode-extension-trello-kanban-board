@@ -17,8 +17,11 @@ export default function Board() {
   const onDragEnd = (result: DropResult) => handleDragEnd(result, state, setState);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={[styles.board, styles.dark].join(" ")}>
+      <div className={[styles.board, styles.dark, state.scope].join(" ")}>
         <header className={styles.header} data-testid="board-header">
+          <div className={[styles.colorSwitch, styles[state.scope]].join(" ")}>
+            <ColorSwitch />
+          </div>
           <DrawerToggle toggle={() => setOpen(!open)} isOpen={open} />
           <h1>Trello Kanban Board: {state.scope}</h1>
           <hr />
@@ -36,9 +39,6 @@ export default function Board() {
 function BrowserOnlyUI() {
   return (
     <>
-      <div className={styles.colorSwitch}>
-        <ColorSwitch />
-      </div>
       <ForkMe
         gitHubUrl="https://github.com/mayank1513/vscode-extension-trello-kanban-board"
         noAutoFork

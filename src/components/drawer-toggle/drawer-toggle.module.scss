@@ -12,7 +12,7 @@ $tr: 5px;
   float: left;
   * {
     height: 3px;
-    background: #dff;
+    background: var(--fg);
     border-radius: 50%;
     border: 1px solid #5555;
     transition: all 0.3s;
