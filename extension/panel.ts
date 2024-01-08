@@ -103,49 +103,56 @@ export class Panel {
   }
 
   // validating data
+  private _parseTasks(data: BoardType, parsedData: BoardType) {
+    if (typeof data.tasks === "object" && !Array.isArray(data.tasks)) {
+      parsedData.tasks = {} as Record<string, TaskType>;
+      Object.keys(data.tasks).forEach((key) => {
+        if (data.tasks[key].id !== key) throw new Error();
+        if (typeof data.tasks[key].description !== "string") throw new Error();
+        if (typeof data.tasks[key].columnId !== "string") throw new Error();
+        parsedData.tasks[key] = {
+          id: data.tasks[key].id,
+          description: data.tasks[key].description,
+          columnId: data.tasks[key].columnId,
+        };
+      });
+    } else {
+      throw new Error();
+    }
+  }
+  private _parseColumns(data: BoardType, parsedData: BoardType) {
+    if (Array.isArray(data.columns)) {
+      parsedData.columns = [];
+      data.columns.forEach((col: ColumnType) => {
+        const parsedCol: ColumnType = {} as ColumnType;
+        if (typeof col.id !== "string") throw new Error();
+        if (typeof col.title !== "string") throw new Error();
+        parsedCol.id = col.id;
+        parsedCol.title = col.title;
+        if (Array.isArray(col.tasksIds)) {
+          parsedCol.tasksIds = [];
+          col.tasksIds.forEach((tId: string) => {
+            if (typeof tId !== "string") throw new Error();
+            if (!parsedData.tasks[tId]) throw new Error();
+            parsedCol.tasksIds.push(tId);
+          });
+        } else {
+          throw new Error();
+        }
+        parsedData.columns.push(parsedCol);
+      });
+    } else {
+      throw new Error();
+    }
+  }
   private async _parseFileData(fileData: string, pathUri: Uri) {
     try {
       const data = JSON.parse(fileData);
       const parsedData: BoardType = {} as BoardType;
       parsedData.theme = data.theme;
       parsedData.scope = data.scope;
-      if (Array.isArray(data.columns)) {
-        parsedData.columns = [];
-        data.columns.forEach((col: ColumnType) => {
-          const parsedCol: ColumnType = {} as ColumnType;
-          if (typeof col.id !== "string") throw new Error();
-          if (typeof col.title !== "string") throw new Error();
-          parsedCol.id = col.id;
-          parsedCol.title = col.title;
-          if (Array.isArray(col.tasksIds)) {
-            parsedCol.tasksIds = [];
-            col.tasksIds.forEach((tId: string) => {
-              if (typeof tId !== "string") throw new Error();
-              parsedCol.tasksIds.push(tId);
-            });
-          } else {
-            throw new Error();
-          }
-          parsedData.columns.push(parsedCol);
-        });
-      } else {
-        throw new Error();
-      }
-      if (typeof data.tasks === "object" && !Array.isArray(data.task)) {
-        parsedData.tasks = {} as Record<string, TaskType>;
-        Object.keys(data.tasks).forEach((key) => {
-          if (data.tasks[key].id !== key) throw new Error();
-          if (typeof data.tasks[key].description !== "string") throw new Error();
-          if (typeof data.tasks[key].columnId !== "string") throw new Error();
-          parsedData.tasks[key] = {
-            id: data.tasks[key].id,
-            description: data.tasks[key].description,
-            columnId: data.tasks[key].columnId,
-          };
-        });
-      } else {
-        throw new Error();
-      }
+      this._parseTasks(data, parsedData);
+      this._parseColumns(data, parsedData);
       return parsedData;
     } catch {
       try {
