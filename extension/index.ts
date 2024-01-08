@@ -1,6 +1,7 @@
 import { ExtensionContext, StatusBarAlignment, StatusBarItem, commands, window, workspace } from "vscode";
 import { Panel } from "./panel";
 import { ScopeType, prefix, scopes } from "./constants";
+import { getConfiguration } from "./util";
 
 const viewButtons: Record<ScopeType, StatusBarItem | null> = {
   Global: null,
@@ -36,8 +37,7 @@ function listenConfigChange(context: ExtensionContext) {
 }
 
 function createStatusBarButton(context: ExtensionContext, scope: ScopeType) {
-  const config = workspace.getConfiguration(prefix.slice(0, prefix.length - 1));
-
+  const config = getConfiguration();
   const alignment = config.get(scope + ".statusBar.alignment");
   const priority = config.get(scope + ".statusBar.priority") as number;
   if (viewButtons[scope]) {

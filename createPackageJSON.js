@@ -40,7 +40,20 @@ if (process.env.TOKEN) {
   });
 }
 
-const configs = {};
+const configs = {
+  [prefix + "Workspace.saveToFile"]: {
+    type: "boolean",
+    default: true,
+    description: "Save workspace data to a file.",
+  },
+  [prefix + "Workspace.filePath"]: {
+    type: "string",
+    /** set to --ignored-- when user chooses "don't ask again" */
+    default: "",
+    description:
+      "The path of the file (relative to current workspace) to save the data to. Prefer saving this to workspace config.",
+  },
+};
 
 scopes.forEach((scope) => {
   configs[prefix + scope + ".statusBar.alignment"] = {
