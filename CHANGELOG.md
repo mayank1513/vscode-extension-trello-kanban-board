@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.5.0
+
+### Minor Changes
+
+- e45dfaf: Add option to save to file (https://github.com/mayank1513/vscode-extension-trello-kanban-board/discussions/29)
+
 ## 0.4.0
 
 ### Minor Changes
