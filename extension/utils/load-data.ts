@@ -67,6 +67,32 @@ async function parseFileData(fileData: string, pathUri: Uri) {
   }
 }
 
+async function attemptLoadFromAnotherFile(
+  config: WorkspaceConfiguration,
+  rootURI: Uri,
+  tkbFile: string,
+  fileNotFound: boolean
+) {
+  const anotherTkbFile = await resolveTKBFile(rootURI, IGNORED);
+  if (!anotherTkbFile) {
+    window.showErrorMessage("Failed to load TKB file. New file will be created automatically!");
+    return;
+  }
+
+  const ans = await window.showErrorMessage(
+    `\`${tkbFile}\` file ${
+      fileNotFound ? "not found" : "is invalid"
+    }. Found another TKB file at \`${anotherTkbFile}\`. Do you want to use this instead?`,
+    "Yes",
+    "No"
+  );
+  if (ans === "Yes") {
+    return await loadFromFile(config, rootURI, anotherTkbFile);
+  } else {
+    window.showInformationMessage("Falling back to workspace data. New file will be created automatically!");
+  }
+}
+
 async function loadFromFile(config: WorkspaceConfiguration, rootURI: Uri, tkbFile: string): Promise<BoardType> {
   let data;
   let fileNotFound = true;
@@ -78,23 +104,7 @@ async function loadFromFile(config: WorkspaceConfiguration, rootURI: Uri, tkbFil
     // update filePath once the data is loaded successfully
     config.update("Workspace.filePath", tkbFile);
   } catch {
-    const anotherTkbFile = await resolveTKBFile(rootURI, IGNORED);
-    if (anotherTkbFile) {
-      const ans = await window.showErrorMessage(
-        `\`${tkbFile}\` file ${
-          fileNotFound ? "not found" : "is invalid"
-        }. Found another TKB file at \`${anotherTkbFile}\`. Do you want to use this instead?`,
-        "Yes",
-        "No"
-      );
-      if (ans === "Yes") {
-        data = await loadFromFile(config, rootURI, anotherTkbFile);
-      } else {
-        window.showInformationMessage("Falling back to workspace data. New file will be created automatically!");
-      }
-    } else {
-      window.showErrorMessage("Failed to load TKB file. New file will be created automatically!");
-    }
+    data = await attemptLoadFromAnotherFile(config, rootURI, tkbFile, fileNotFound);
   }
   return data as BoardType;
 }
