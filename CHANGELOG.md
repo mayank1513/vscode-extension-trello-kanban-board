@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.5.1
+
+### Patch Changes
+
+- Fix loading issues. Improve readability
+
 ## 0.5.0
 
 ### Minor Changes
