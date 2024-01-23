@@ -42,8 +42,9 @@ if (process.env.TOKEN) {
 
 const configs = {
   [prefix + "Workspace.saveToFile"]: {
-    type: "boolean",
-    default: true,
+    type: "string",
+    default: "Yes",
+    enum: ["Yes", "No"],
     description: "Save workspace data to a file.",
   },
   [prefix + "Workspace.filePath"]: {

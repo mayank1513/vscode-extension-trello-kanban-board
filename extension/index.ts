@@ -1,7 +1,7 @@
 import { ExtensionContext, StatusBarAlignment, StatusBarItem, commands, window, workspace } from "vscode";
 import { Panel } from "./panel";
 import { ScopeType, prefix, scopes } from "./constants";
-import { getConfiguration } from "./util";
+import { getConfiguration } from "./utils/config";
 
 const viewButtons: Record<ScopeType, StatusBarItem | null> = {
   Global: null,
