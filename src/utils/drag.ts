@@ -1,5 +1,28 @@
 import { BoardType } from "@/interface";
-import { DropResult } from "react-beautiful-dnd";
+import { DraggableLocation, DropResult } from "react-beautiful-dnd";
+
+function moveTask(
+  state: BoardType,
+  destination: DraggableLocation,
+  source: DraggableLocation,
+  setState: (state: BoardType) => void
+) {
+  const columns = [...state.columns];
+  const sourceCol = columns.find((c) => c.id === source.droppableId);
+  let destinationCol;
+  if (destination.droppableId === "columns") {
+    destinationCol = columns[Math.min(destination.index, columns.length - 1)];
+  } else {
+    destinationCol = columns.find((c) => c.id === destination.droppableId);
+  }
+  const taskId = sourceCol?.tasksIds.splice(source.index, 1)[0];
+  const tasks = { ...state.tasks };
+  if (taskId) {
+    tasks[taskId].columnId = destination.droppableId;
+    destinationCol?.tasksIds.splice(destination.index, 0, taskId);
+    setState({ ...state, columns });
+  }
+}
 
 export function handleDragEnd(result: DropResult, state: BoardType, setState: (state: BoardType) => void) {
   const { source, destination, draggableId } = result;
@@ -14,19 +37,6 @@ export function handleDragEnd(result: DropResult, state: BoardType, setState: (s
     columns.splice(destination.index, 0, column);
     setState({ ...state, columns: columns });
   } else {
-    const sourceCol = columns.find((c) => c.id === source.droppableId);
-    let destinationCol;
-    if (destination.droppableId === "columns") {
-      destinationCol = columns[Math.min(destination.index, columns.length - 1)];
-    } else {
-      destinationCol = columns.find((c) => c.id === destination.droppableId);
-    }
-    const taskId = sourceCol?.tasksIds.splice(source.index, 1)[0];
-    const tasks = { ...state.tasks };
-    if (taskId) {
-      tasks[taskId].columnId = destination.droppableId;
-      destinationCol?.tasksIds.splice(destination.index, 0, taskId);
-      setState({ ...state, columns });
-    }
+    moveTask(state, destination, source, setState);
   }
 }
