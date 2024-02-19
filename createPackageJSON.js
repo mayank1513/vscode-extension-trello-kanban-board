@@ -34,9 +34,6 @@ if (process.env.TOKEN) {
     draft: false,
     prerelease: false,
     generate_release_notes: true,
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
   });
 }
 

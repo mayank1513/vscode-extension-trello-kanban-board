@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.5.2
+
+### Patch Changes
+
+- Fix #35
+
 ## 0.5.1
 
 ### Patch Changes
