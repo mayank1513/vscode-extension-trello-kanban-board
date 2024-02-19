@@ -112,7 +112,7 @@ export class Panel {
     if (tkbFile !== filePath) config.update("Workspace.filePath", tkbFile);
     workspace.fs.writeFile(
       Uri.joinPath(rootURI, tkbFile),
-      new TextEncoder().encode(JSON.stringify(this._context.workspaceState.get(prefix)))
+      new TextEncoder().encode(JSON.stringify(this._context.workspaceState.get(prefix), null, 2))
     );
   }
 }
