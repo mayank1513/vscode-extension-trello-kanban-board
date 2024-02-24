@@ -60,7 +60,7 @@ You can contribute by creating issues and PRs or by sponsoring my work.
 3. Star and Fork the [repo](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
 4. Sponsor - [GitHub Sponsor](https://github.com/sponsors/mayank1513) Or [Razorpay](https://pages.razorpay.com/mayank1513)
 
-### [🤩 Don't forget to start this repo!](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
+### [🤩 Don't forget to star this repo!](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
 
 [💖](https://github.com/mayank1513/vscode-extension-trello-kanban-board) [🌟](https://github.com/mayank1513/vscode-extension-trello-kanban-board)
 
