@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.5.3
+
+### Patch Changes
+
+- Allow 2 \n for better formatting options. - https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues/41
+
 ## 0.5.2
 
 ### Patch Changes
