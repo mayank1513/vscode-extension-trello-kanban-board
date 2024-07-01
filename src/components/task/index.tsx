@@ -55,7 +55,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
               value={task.description}
               ref={textareaRef}
               onChange={(e) => {
-                task.description = e.target.value.replace(/ +/, " ").replace(/\n+/g, "\n");
+                task.description = e.target.value.replace(/ +/, " ").replace(/\n\n+/g, "\n\n");
                 setState({ ...state, tasks: { ...state.tasks } });
                 resizeTextArea(textareaRef);
               }}
