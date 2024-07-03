@@ -132,21 +132,21 @@ describe("Test Board", () => {
     expect(setStateFn).toBeCalled();
   });
 
+  test("Edit task", async ({ expect }) => {
+    const columnEl = screen.getByTestId("column-0");
+    const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
+    act(() => fireEvent.doubleClick(taskEl));
+    const inputEl = taskEl.getElementsByTagName("textarea")[0];
+    act(() => fireEvent.input(inputEl, { target: { value: "Task 1" } }));
+    act(() => fireEvent.blur(inputEl));
+    expect(taskEl.textContent).toContain("Task 1");
+  });
+
   test("Remove task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
     act(() => fireEvent.click(taskEl.getElementsByClassName(taskStyles.close)[0]));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(1);
-  });
-
-  test("Edit task", async ({ expect }) => {
-    const columnEl = screen.getByTestId("column-0");
-    const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
-    act(() => fireEvent.click(taskEl));
-    const inputEl = taskEl.getElementsByTagName("textarea")[0];
-    act(() => fireEvent.input(inputEl, { target: { value: "Task 1" } }));
-    act(() => fireEvent.blur(inputEl));
-    expect(taskEl.textContent).toContain("Task 1");
   });
 
   test("Drawer", ({ expect }) => {
