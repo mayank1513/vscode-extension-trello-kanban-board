@@ -38,7 +38,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
           provided.draggableProps.style.transform += " rotate(5deg)";
         return (
           <label
-            onClick={() => {
+            onDoubleClick={() => {
               setIsEditing(true);
               resizeTextArea(textareaRef);
               if (textareaRef.current?.value) {
