@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import { MouseTrail } from "react-webgl-trails";
 import { vi } from "vitest";
 
 export const scrollIntoViewMock = vi.fn();
@@ -17,3 +18,5 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
+
+vi.mock("react-webgl-trails", () => ({ MouseTrail: () => null }));
