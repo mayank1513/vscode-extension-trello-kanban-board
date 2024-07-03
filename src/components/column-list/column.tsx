@@ -24,7 +24,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
       // listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       const newTaskElement = listRef.current?.children[listRef.current.children.length - 1] as HTMLLabelElement;
       newTaskElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-      newTaskElement?.click();
+      newTaskElement?.getElementsByTagName("button")[0].click();
       setTimeout(() => {
         newTaskElement?.getElementsByTagName("textarea")[0].focus();
         newTaskElement?.getElementsByTagName("textarea")[0].click();

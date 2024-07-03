@@ -44,8 +44,10 @@ describe("Test Board", () => {
 
   test("Create new tasks", ({ expect }) => {
     const columnEl = screen.getByTestId("column-3");
-    act(() => fireEvent.click(columnEl.getElementsByTagName("button")[0]));
-    act(() => fireEvent.click(columnEl.getElementsByTagName("button")[0]));
+    // click add task button
+    act(() => fireEvent.click(columnEl.getElementsByClassName(columnListStyles.addTask)[0]));
+    // Add another task
+    act(() => fireEvent.click(columnEl.getElementsByClassName(columnListStyles.addTask)[0]));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
   });
 
@@ -60,7 +62,7 @@ describe("Test Board", () => {
 
   test("Create a new task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
-    act(() => fireEvent.click(columnEl.getElementsByTagName("button")[0]));
+    act(() => fireEvent.click(columnEl.getElementsByClassName(columnListStyles.addTask)[0]));
     await new Promise((resolve) => setTimeout(resolve, 400));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
     expect(scrollIntoViewMock).toBeCalled();
@@ -69,12 +71,12 @@ describe("Test Board", () => {
   /** Todo: drop on another column or position */
   test("Move task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
-    const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
+    const taskHanleEl = columnEl.getElementsByClassName(taskStyles.task)[0].getElementsByTagName("header")[0];
     // simulate dragging -- not very effective
-    act(() => fireEvent.mouseDown(taskEl, { clientX: 100, clientY: 150 }));
-    act(() => fireEvent.mouseMove(taskEl, { clientX: 450, clientY: 500 }));
-    act(() => fireEvent.mouseMove(taskEl, { clientX: 650, clientY: 300 }));
-    act(() => fireEvent.mouseUp(taskEl, { clientX: 650, clientY: 300 }));
+    act(() => fireEvent.mouseDown(taskHanleEl, { clientX: 100, clientY: 150 }));
+    act(() => fireEvent.mouseMove(taskHanleEl, { clientX: 450, clientY: 500 }));
+    act(() => fireEvent.mouseMove(taskHanleEl, { clientX: 650, clientY: 300 }));
+    act(() => fireEvent.mouseUp(taskHanleEl, { clientX: 650, clientY: 300 }));
     expect(columnEl.getElementsByClassName(taskStyles.task).length).toBe(2);
   });
 
@@ -135,7 +137,8 @@ describe("Test Board", () => {
   test("Edit task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
-    act(() => fireEvent.doubleClick(taskEl));
+    const editBtn = taskEl.getElementsByTagName("button")[0];
+    act(() => fireEvent.click(editBtn));
     const inputEl = taskEl.getElementsByTagName("textarea")[0];
     act(() => fireEvent.input(inputEl, { target: { value: "Task 1" } }));
     act(() => fireEvent.blur(inputEl));

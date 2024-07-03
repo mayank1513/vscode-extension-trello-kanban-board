@@ -45,9 +45,6 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
             <header {...provided.dragHandleProps}>
               <span>∘∘∘</span>
-              <button className={styles.close} onClick={removeTask}>
-                ✖
-              </button>
               <button
                 onClick={() => {
                   setIsEditing(true);
@@ -58,6 +55,9 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                   setTimeout(() => resizeTextArea(textareaRef), 100);
                 }}>
                 🖉
+              </button>
+              <button className={styles.close} onClick={removeTask}>
+                ✖
               </button>
             </header>
             <textarea
