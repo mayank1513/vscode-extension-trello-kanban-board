@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import { MouseTrail } from "react-webgl-trails";
 import { vi } from "vitest";
 
 export const scrollIntoViewMock = vi.fn();
