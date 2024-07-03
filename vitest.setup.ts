@@ -17,3 +17,5 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
+
+vi.mock("react-webgl-trails", () => ({ MouseTrail: () => null }));

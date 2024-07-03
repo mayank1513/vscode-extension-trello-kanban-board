@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.6.1
+
+### Patch Changes
+
+- 093b58c: Fix clicking on link and allow selection without entering editing mode.
+
 ## 0.6.0
 
 ### Minor Changes

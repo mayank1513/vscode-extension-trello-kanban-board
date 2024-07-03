@@ -53,7 +53,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   max-height: calc(100vh - 200px);
-  padding: 0;
+  padding: 0 10px;
+  margin: 0 -10px;
 }
 .close {
   display: none;
