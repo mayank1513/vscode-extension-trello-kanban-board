@@ -1,5 +1,5 @@
 .task {
-  margin: 5px;
+  margin-bottom: 10px;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid gray;
@@ -7,6 +7,34 @@
   display: block;
   position: relative;
   background: var(--bg);
+  header {
+    text-align: center;
+    box-shadow: 0 0 2px currentColor;
+    margin: -5px;
+    margin-bottom: -5px;
+    margin-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    padding-bottom: 2px;
+    position: relative;
+    button {
+      all: unset;
+      position: absolute;
+      right: 24px;
+      top: 0;
+      cursor: pointer;
+      padding: 0 5px;
+      &:hover {
+        color: orange;
+      }
+    }
+
+    .close {
+      right: 2px;
+      &:hover {
+        color: red;
+      }
+    }
+  }
   textarea {
     width: calc(100% - 10px);
     resize: none;
@@ -18,24 +46,10 @@
   ul {
     padding-left: 20px;
   }
-  &:hover .close {
-    display: block;
-  }
 }
 .active {
   box-shadow: 0 0 5px red;
 }
 .placeholder {
   opacity: 0.5;
-}
-.close {
-  position: absolute;
-  right: 5px;
-  top: -5px;
-  display: none;
-  cursor: pointer;
-  z-index: 100;
-  &:hover {
-    color: red;
-  }
 }

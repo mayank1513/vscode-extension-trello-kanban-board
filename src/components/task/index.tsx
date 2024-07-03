@@ -38,21 +38,27 @@ export default function Task({ task, index }: { task: TaskType; index: number })
           provided.draggableProps.style.transform += " rotate(5deg)";
         return (
           <label
-            onClick={() => vscode.toast("Double-click to enter editing mode!")}
-            onDoubleClick={() => {
-              setIsEditing(true);
-              resizeTextArea(textareaRef);
-              if (textareaRef.current?.value) {
-                textareaRef.current.value = "hk";
-                textareaRef.current.value = task.description;
-              }
-            }}
-            title="Double click to enter editing mode."
             htmlFor={id}
             ref={provided.innerRef}
-            {...provided.dragHandleProps}
             {...provided.draggableProps}
             className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
+            <header {...provided.dragHandleProps}>
+              <span>∘∘∘</span>
+              <button className={styles.close} onClick={removeTask}>
+                ✖
+              </button>
+              <button
+                onClick={() => {
+                  setIsEditing(true);
+                  if (textareaRef.current?.value) {
+                    textareaRef.current.value = "hk";
+                    textareaRef.current.value = task.description;
+                  }
+                  setTimeout(() => resizeTextArea(textareaRef), 100);
+                }}>
+                🖉
+              </button>
+            </header>
             <textarea
               id={id}
               value={task.description}
@@ -66,9 +72,6 @@ export default function Task({ task, index }: { task: TaskType; index: number })
               placeholder="Enter task description in Markdown format"
               hidden={!isEditing}
             />
-            <span className={styles.close} onClick={removeTask}>
-              ✖
-            </span>
             {!isEditing &&
               (task.description.trim() ? (
                 <ReactMarkdown rehypePlugins={[rehypeRaw]}>{task.description.replace(/\n+/g, "\n\n")}</ReactMarkdown>
