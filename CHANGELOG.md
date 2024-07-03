@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.6.0
+
+### Minor Changes
+
+- 3c2d28c: Support html. Now you can style your tasks by writing html code. For having extra line breaks, use <br /> tag.
+
 ## 0.5.3
 
 ### Patch Changes
