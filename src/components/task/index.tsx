@@ -2,6 +2,7 @@ import { TaskType } from "@/interface";
 import { RefObject, useId, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { useGlobalState } from "utils/context";
 import styles from "./task.module.scss";
 import { vscode } from "utils/vscode";
@@ -68,7 +69,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
             </span>
             {!isEditing &&
               (task.description.trim() ? (
-                <ReactMarkdown>{task.description.replace(/\n+/g, "\n\n")}</ReactMarkdown>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{task.description.replace(/\n+/g, "\n\n")}</ReactMarkdown>
               ) : (
                 <p className={styles.placeholder}>Enter task description in Markdown format.</p>
               ))}
