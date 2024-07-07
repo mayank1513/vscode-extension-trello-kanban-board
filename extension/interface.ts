@@ -9,11 +9,13 @@ export interface TaskType {
   id: string;
   description: string;
   columnId: string;
+  color?: string;
 }
 
 export interface ColumnType {
   id: string;
   title: string;
+  color?: string;
   description?: string;
   archived?: boolean;
   tasksIds: string[];
