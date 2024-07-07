@@ -46,56 +46,57 @@ export default function Task({ task, index }: { task: TaskType; index: number })
         {(provided, snapshot) => {
           if (snapshot.isDragging && provided.draggableProps.style?.transform)
             provided.draggableProps.style.transform += " rotate(5deg)";
+
           return (
-            <label
-              htmlFor={id}
-              ref={provided.innerRef}
-              {...provided.draggableProps}
-              style={{ background: task.color }}
-              className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
-              <header {...provided.dragHandleProps}>
-                <span>∘∘∘</span>
-                <button onClick={() => setShowColorSelector(true)}>🖌</button>
-                <button
-                  onClick={() => {
-                    setIsEditing(true);
-                    if (textareaRef.current?.value) {
-                      textareaRef.current.value = "hk";
-                      textareaRef.current.value = task.description;
-                    }
-                    setTimeout(() => {
-                      textareaRef.current && textareaRef.current.focus();
-                      resizeTextArea(textareaRef);
-                    }, 100);
-                  }}>
-                  🖉
-                </button>
-                <button className={styles.close} onClick={removeTask}>
-                  ✖
-                </button>
-              </header>
-              <textarea
-                id={id}
-                value={task.description}
-                ref={textareaRef}
-                onChange={(e) => {
-                  task.description = e.target.value.replace(/ +/, " ").replace(/\n\n+/g, "\n\n");
-                  setState({ ...state, tasks: { ...state.tasks } });
-                  resizeTextArea(textareaRef);
-                }}
-                onBlur={() => setIsEditing(false)}
-                placeholder="Enter task description in Markdown format"
-                hidden={!isEditing}
-              />
-              {!isEditing &&
-                (task.description.trim() ? (
-                  <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                    {task.description.replace(/\n+/g, "\n\n")}
-                  </ReactMarkdown>
-                ) : (
-                  <p className={styles.placeholder}>Enter task description in Markdown format.</p>
-                ))}
-            </label>
+            <div ref={provided.innerRef} {...provided.draggableProps}>
+              <label
+                htmlFor={id}
+                className={[styles.task, isEditing ? styles.active : ""].join(" ")}
+                style={{ background: task.color }}>
+                <header {...provided.dragHandleProps}>
+                  <span>∘∘∘</span>
+                  <button onClick={() => setShowColorSelector(true)}>🖌</button>
+                  <button
+                    onClick={() => {
+                      setIsEditing(true);
+                      if (textareaRef.current?.value) {
+                        textareaRef.current.value = "hk";
+                        textareaRef.current.value = task.description;
+                      }
+                      setTimeout(() => {
+                        textareaRef.current && textareaRef.current.focus();
+                        resizeTextArea(textareaRef);
+                      }, 100);
+                    }}>
+                    🖉
+                  </button>
+                  <button className={styles.close} onClick={removeTask}>
+                    ✖
+                  </button>
+                </header>
+                <textarea
+                  id={id}
+                  value={task.description}
+                  ref={textareaRef}
+                  onChange={(e) => {
+                    task.description = e.target.value.replace(/ +/, " ").replace(/\n\n+/g, "\n\n");
+                    setState({ ...state, tasks: { ...state.tasks } });
+                    resizeTextArea(textareaRef);
+                  }}
+                  onBlur={() => setIsEditing(false)}
+                  placeholder="Enter task description in Markdown format"
+                  hidden={!isEditing}
+                />
+                {!isEditing &&
+                  (task.description.trim() ? (
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+                      {task.description.replace(/\n+/g, "\n\n")}
+                    </ReactMarkdown>
+                  ) : (
+                    <p className={styles.placeholder}>Enter task description in Markdown format.</p>
+                  ))}
+              </label>
+            </div>
           );
         }}
       </Draggable>
