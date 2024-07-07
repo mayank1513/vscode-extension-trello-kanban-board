@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.0
+
+### Minor Changes
+
+- 9ea8bcd: You can now select custom colors for your taks and columns.
+
 ## 0.6.1
 
 ### Patch Changes
