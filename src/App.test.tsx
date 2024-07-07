@@ -170,4 +170,21 @@ describe("Test Board", () => {
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));
   });
+
+  test("Set Column color renders", () => {
+    const columnEl = screen.getByTestId("column-0");
+    const colorBtn = columnEl
+      .getElementsByClassName(columnListStyles.headerContent)[0]
+      .getElementsByTagName("button")[0];
+    act(() => fireEvent.click(colorBtn));
+    act(() => fireEvent.click(screen.getByText("Ok")));
+  });
+
+  test("Set Task color renders", () => {
+    const columnEl = screen.getByTestId("column-0");
+    const taskHEaderEl = columnEl.getElementsByClassName(taskStyles.task)[0].getElementsByTagName("header")[0];
+    const colorBtn = taskHEaderEl.getElementsByTagName("button")[0];
+    act(() => fireEvent.click(colorBtn));
+    act(() => fireEvent.click(screen.getByText("Ok")));
+  });
 });
