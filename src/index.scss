@@ -1,4 +1,5 @@
 @import "nextjs-themes/styles";
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -62,4 +63,40 @@ a {
 [data-csp="system"] {
   --bg: var(--vscode-editor-background);
   --fg: var(--vscode-editor-foreground);
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(3px);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow: auto;
+  .content {
+    box-shadow: 0 0 10px currentColor;
+    border-radius: 10px;
+    text-align: right;
+    background: #121212;
+  }
+  .rcp-root {
+    position: relative;
+    width: 400px;
+    label {
+      display: none;
+    }
+  }
+  button {
+    cursor: pointer;
+    margin: 0 10px 10px 0;
+  }
 }
