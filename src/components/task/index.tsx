@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { useGlobalState } from "utils/context";
 import styles from "./task.module.scss";
 import { vscode } from "utils/vscode";
+import { ColorSelector } from "components/color-selector";
 
 function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
   const target = textareaRef.current;
@@ -18,6 +19,7 @@ function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
 export default function Task({ task, index }: { task: TaskType; index: number }) {
   const { state, setState } = useGlobalState();
   const [isEditing, setIsEditing] = useState(false);
+  const [showColorSelector, setShowColorSelector] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const id = useId();
 
@@ -32,61 +34,74 @@ export default function Task({ task, index }: { task: TaskType; index: number })
     setState({ ...state, tasks, columns });
     vscode.toast("Task deleted!", "success");
   };
+
+  const setColor = (color: string) => {
+    task.color = color;
+    setState({ ...state, tasks: { ...state.tasks } });
+    setShowColorSelector(false);
+  };
   return (
-    <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => {
-        if (snapshot.isDragging && provided.draggableProps.style?.transform)
-          provided.draggableProps.style.transform += " rotate(5deg)";
-        return (
-          <label
-            htmlFor={id}
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
-            <header {...provided.dragHandleProps}>
-              <span>∘∘∘</span>
-              <button
-                onClick={() => {
-                  setIsEditing(true);
-                  if (textareaRef.current?.value) {
-                    textareaRef.current.value = "hk";
-                    textareaRef.current.value = task.description;
-                  }
-                  setTimeout(() => {
-                    textareaRef.current && textareaRef.current.focus();
-                    resizeTextArea(textareaRef);
-                  }, 100);
-                }}>
-                🖉
-              </button>
-              <button className={styles.close} onClick={removeTask}>
-                ✖
-              </button>
-            </header>
-            <textarea
-              id={id}
-              value={task.description}
-              ref={textareaRef}
-              onChange={(e) => {
-                task.description = e.target.value.replace(/ +/, " ").replace(/\n\n+/g, "\n\n");
-                setState({ ...state, tasks: { ...state.tasks } });
-                resizeTextArea(textareaRef);
-              }}
-              onBlur={() => setIsEditing(false)}
-              placeholder="Enter task description in Markdown format"
-              hidden={!isEditing}
-            />
-            {!isEditing &&
-              (task.description.trim() ? (
-                <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                  {task.description.replace(/\n+/g, "\n\n")}
-                </ReactMarkdown>
-              ) : (
-                <p className={styles.placeholder}>Enter task description in Markdown format.</p>
-              ))}
-          </label>
-        );
-      }}
-    </Draggable>
+    <>
+      <Draggable draggableId={task.id} index={index}>
+        {(provided, snapshot) => {
+          if (snapshot.isDragging && provided.draggableProps.style?.transform)
+            provided.draggableProps.style.transform += " rotate(5deg)";
+          return (
+            <label
+              htmlFor={id}
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              style={{ background: task.color }}
+              className={[styles.task, isEditing ? styles.active : ""].join(" ")}>
+              <header {...provided.dragHandleProps}>
+                <span>∘∘∘</span>
+                <button onClick={() => setShowColorSelector(true)}>🖌</button>
+                <button
+                  onClick={() => {
+                    setIsEditing(true);
+                    if (textareaRef.current?.value) {
+                      textareaRef.current.value = "hk";
+                      textareaRef.current.value = task.description;
+                    }
+                    setTimeout(() => {
+                      textareaRef.current && textareaRef.current.focus();
+                      resizeTextArea(textareaRef);
+                    }, 100);
+                  }}>
+                  🖉
+                </button>
+                <button className={styles.close} onClick={removeTask}>
+                  ✖
+                </button>
+              </header>
+              <textarea
+                id={id}
+                value={task.description}
+                ref={textareaRef}
+                onChange={(e) => {
+                  task.description = e.target.value.replace(/ +/, " ").replace(/\n\n+/g, "\n\n");
+                  setState({ ...state, tasks: { ...state.tasks } });
+                  resizeTextArea(textareaRef);
+                }}
+                onBlur={() => setIsEditing(false)}
+                placeholder="Enter task description in Markdown format"
+                hidden={!isEditing}
+              />
+              {!isEditing &&
+                (task.description.trim() ? (
+                  <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+                    {task.description.replace(/\n+/g, "\n\n")}
+                  </ReactMarkdown>
+                ) : (
+                  <p className={styles.placeholder}>Enter task description in Markdown format.</p>
+                ))}
+            </label>
+          );
+        }}
+      </Draggable>
+      {showColorSelector && (
+        <ColorSelector color={task.color} setColor={setColor} onClose={() => setShowColorSelector(false)} />
+      )}
+    </>
   );
 }
