@@ -52,7 +52,10 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                     textareaRef.current.value = "hk";
                     textareaRef.current.value = task.description;
                   }
-                  setTimeout(() => resizeTextArea(textareaRef), 100);
+                  setTimeout(() => {
+                    textareaRef.current && textareaRef.current.focus();
+                    resizeTextArea(textareaRef);
+                  }, 100);
                 }}>
                 🖉
               </button>
