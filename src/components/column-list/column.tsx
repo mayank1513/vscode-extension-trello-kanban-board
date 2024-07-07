@@ -47,7 +47,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
           <Droppable droppableId={column.id} direction="vertical">
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
-                <div className={styles.column}>
+                <div className={styles.column} style={{ background: column.color }}>
                   <ColumnHeader column={column} {...provided.dragHandleProps} />
                   <hr />
                   <ul className={styles.taskList} ref={listRef}>

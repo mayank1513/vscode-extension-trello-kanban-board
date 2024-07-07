@@ -23,15 +23,28 @@
   background: var(--bg);
 }
 .header {
-  &:hover .close {
+  button {
+    all: unset;
+    display: none;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+  &:hover button {
     display: inline-block;
+  }
+  button:hover {
+    color: orange;
+  }
+
+  .close:hover {
+    color: red;
   }
 }
 .headerContent {
   cursor: grab;
   display: flex;
   padding: 0 5px;
-  justify-content: space-between;
+  align-items: center;
 }
 .placeholder {
   opacity: 0.5;
@@ -55,11 +68,4 @@
   max-height: calc(100vh - 200px);
   padding: 0 10px;
   margin: 0 -10px;
-}
-.close {
-  display: none;
-  cursor: pointer;
-  &:hover {
-    color: red;
-  }
 }
