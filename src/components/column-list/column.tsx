@@ -24,7 +24,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
       // listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       const newTaskElement = listRef.current?.children[listRef.current.children.length - 1] as HTMLLabelElement;
       newTaskElement?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-      newTaskElement?.getElementsByTagName("button")[0].click();
+      newTaskElement?.getElementsByTagName("button")[1].click();
       setTimeout(() => {
         newTaskElement?.getElementsByTagName("textarea")[0].focus();
         newTaskElement?.getElementsByTagName("textarea")[0].click();
@@ -47,7 +47,7 @@ export default function Column({ column, index }: { column: ColumnType; index: n
           <Droppable droppableId={column.id} direction="vertical">
             {(provided1) => (
               <div ref={provided1.innerRef} {...provided1.droppableProps} className={styles.columnDropzone}>
-                <div className={styles.column}>
+                <div className={styles.column} style={{ background: column.color }}>
                   <ColumnHeader column={column} {...provided.dragHandleProps} />
                   <hr />
                   <ul className={styles.taskList} ref={listRef}>

@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import { useState } from "react";
 import { vi } from "vitest";
 
 export const scrollIntoViewMock = vi.fn();
@@ -19,3 +20,5 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 vi.mock("react-webgl-trails", () => ({ MouseTrail: () => null }));
+
+vi.mock("react-color-palette", () => ({ ColorPicker: () => null, useColor: useState }));

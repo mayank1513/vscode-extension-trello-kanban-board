@@ -18,6 +18,7 @@
     position: relative;
     button {
       all: unset;
+      display: none;
       position: absolute;
       right: 24px;
       top: 0;
@@ -28,12 +29,20 @@
       }
     }
 
+    button:first-of-type {
+      right: 48px;
+    }
+
     .close {
       right: 2px;
       &:hover {
         color: red;
       }
     }
+  }
+
+  &:hover button {
+    display: inline-block;
   }
   textarea {
     width: calc(100% - 10px);

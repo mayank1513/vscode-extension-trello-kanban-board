@@ -137,7 +137,7 @@ describe("Test Board", () => {
   test("Edit task", async ({ expect }) => {
     const columnEl = screen.getByTestId("column-0");
     const taskEl = columnEl.getElementsByClassName(taskStyles.task)[0];
-    const editBtn = taskEl.getElementsByTagName("button")[0];
+    const editBtn = taskEl.getElementsByTagName("button")[1];
     act(() => fireEvent.click(editBtn));
     const inputEl = taskEl.getElementsByTagName("textarea")[0];
     act(() => fireEvent.input(inputEl, { target: { value: "Task 1" } }));
@@ -169,5 +169,22 @@ describe("Test Board", () => {
     const el = screen.getByText("📋 Open TKB (Global)");
     expect(el).toBeDefined();
     act(() => fireEvent.click(el));
+  });
+
+  test("Set Column color renders", () => {
+    const columnEl = screen.getByTestId("column-0");
+    const colorBtn = columnEl
+      .getElementsByClassName(columnListStyles.headerContent)[0]
+      .getElementsByTagName("button")[0];
+    act(() => fireEvent.click(colorBtn));
+    act(() => fireEvent.click(screen.getByText("Ok")));
+  });
+
+  test("Set Task color renders", () => {
+    const columnEl = screen.getByTestId("column-0");
+    const taskHEaderEl = columnEl.getElementsByClassName(taskStyles.task)[0].getElementsByTagName("header")[0];
+    const colorBtn = taskHEaderEl.getElementsByTagName("button")[0];
+    act(() => fireEvent.click(colorBtn));
+    act(() => fireEvent.click(screen.getByText("Ok")));
   });
 });
