@@ -22,7 +22,8 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html", "clover"],
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/**/main.tsx", "src/**/vscode.ts", "src/**/*.d.ts"],
+      // canvas tests not supported, external library
+      exclude: ["src/**/main.tsx", "src/**/color-selector.tsx", "src/**/vscode.ts", "src/**/*.d.ts"],
     },
   },
 });
