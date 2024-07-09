@@ -38,7 +38,7 @@ export default function Drawer({ open, scope }: { open: boolean; scope: string }
             <input
               id="trails"
               type="checkbox"
-              checked={!state.hideTrails}
+              checked={!state?.hideTrails}
               onClick={() => setState({ ...state, hideTrails: !state.hideTrails })}
             />
             {"  "}
