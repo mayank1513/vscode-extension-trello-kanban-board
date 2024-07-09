@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.1
+
+### Patch Changes
+
+- 387ba59: Add option to hide mouse trails.
+
 ## 0.7.0
 
 ### Minor Changes
