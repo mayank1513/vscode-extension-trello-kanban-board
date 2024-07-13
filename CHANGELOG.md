@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.2
+
+### Patch Changes
+
+- 2ec1edb: Fix autolink not detecting - and \_ at the end.
+
 ## 0.7.1
 
 ### Patch Changes
