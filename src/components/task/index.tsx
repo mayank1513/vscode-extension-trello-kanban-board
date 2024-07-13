@@ -8,6 +8,7 @@ import { useGlobalState } from "utils/context";
 import styles from "./task.module.scss";
 import { vscode } from "utils/vscode";
 import { ColorSelector } from "components/color-selector";
+import { autoLinkMd } from "react-markdown-autolink";
 
 function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
   const target = textareaRef.current;
@@ -90,7 +91,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                 {!isEditing &&
                   (task.description.trim() ? (
                     <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                      {task.description.replace(/\n+/g, "\n\n")}
+                      {autoLinkMd(task.description.replace(/\n+/g, "\n\n"))}
                     </ReactMarkdown>
                   ) : (
                     <p className={styles.placeholder}>Enter task description in Markdown format.</p>
