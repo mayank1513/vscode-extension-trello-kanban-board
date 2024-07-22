@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.3
+
+### Patch Changes
+
+- c3e35c4: fix: hideMousetrail option resetting when focus is lost.
+
 ## 0.7.2
 
 ### Patch Changes
