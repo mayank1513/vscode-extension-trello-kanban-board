@@ -9,7 +9,8 @@
     "build:all": "npm run build && npm run build:extension",
     "test": "vitest run --coverage",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "preview": "vite preview --port 3000",
+    "start": "npm run preview",
     "build:extension": "tsc -p tsconfig.extension.json && node createPackageJSON.js",
     "deploy": "npm run build:all && cd dist && vsce publish"
   },

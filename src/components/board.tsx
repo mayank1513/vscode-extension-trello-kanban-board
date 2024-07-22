@@ -9,6 +9,8 @@ import { useState } from "react";
 import Drawer from "./drawer";
 import { handleDragEnd } from "utils/drag";
 import { ColorSwitch } from "nextjs-themes";
+import { MouseTrail } from "react-webgl-trails";
+import { Particles } from "webgl-generative-particles/react";
 
 export default function Board() {
   const { state, setState } = useGlobalState();
@@ -32,6 +34,13 @@ export default function Board() {
         </main>
         {state.scope === "Browser" && <BrowserOnlyUI />}
       </div>
+
+      {!state.hideTrails && (
+        <>
+          <MouseTrail />
+          <Particles fullScreenOverlay />
+        </>
+      )}
     </DragDropContext>
   );
 }

@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 export const taskId = "task-" + nanoid();
 export const defaultBoard: BoardType = {
   scope: "",
+  hideTrails: true,
   tasks: {
     [taskId]: {
       id: taskId,
