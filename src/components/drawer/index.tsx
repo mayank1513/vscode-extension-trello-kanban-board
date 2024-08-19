@@ -39,7 +39,7 @@ export default function Drawer({ open, scope }: { open: boolean; scope: string }
               id="trails"
               type="checkbox"
               checked={!state?.hideTrails}
-              onChange={() => setState({ ...state, hideTrails: !state.hideTrails })}
+              onChange={() => setState({ ...state, hideTrails: (state.hideTrails! + 1) % 2 })}
             />
             {"  "}
             Show mouse trails?

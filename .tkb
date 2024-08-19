@@ -25,5 +25,6 @@
       "title": "Done",
       "tasksIds": []
     }
-  ]
+  ],
+  "hideTrails": 1
 }
