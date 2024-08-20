@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.5
+
+### Patch Changes
+
+- 429dd4a: Attempt fi
+
 ## 0.7.4
 
 ### Patch Changes
