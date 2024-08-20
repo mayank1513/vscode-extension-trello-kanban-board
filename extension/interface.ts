@@ -26,5 +26,5 @@ export interface BoardType {
   columns: ColumnType[];
   tasks: { [key: string]: TaskType };
   scope: string;
-  hideTrails?: number;
+  hideTrails: number;
 }
