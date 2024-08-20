@@ -1,7 +1,6 @@
 import { vscode } from "utils/vscode";
 import styles from "./drawer.module.scss";
 import { MouseEventHandler } from "react";
-import { useGlobalState } from "utils/context";
 
 const links = [
   {
@@ -27,24 +26,10 @@ const links = [
 ];
 
 export default function Drawer({ open, scope }: { open: boolean; scope: string }) {
-  const { state, setState } = useGlobalState();
-
   return (
     <aside className={[styles.drawer, open ? styles.open : ""].join(" ")}>
       <ul>
         {scope !== "Browser" && <ExtensionOnlyUI scope={scope} />}
-        <li>
-          <label htmlFor="trails">
-            <input
-              id="trails"
-              type="checkbox"
-              checked={!state?.hideTrails}
-              onChange={() => setState({ ...state, hideTrails: (state.hideTrails ?? 0 + 1) % 2 })}
-            />
-            {"  "}
-            Show mouse trails?
-          </label>
-        </li>
         {links.map(({ text, href }) => (
           <li key={href}>
             <a href={href} target="_blank">
