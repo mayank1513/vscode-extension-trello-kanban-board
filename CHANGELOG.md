@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.6
+
+### Patch Changes
+
+- a15aff3: Remove trails
+
 ## 0.7.5
 
 ### Patch Changes
