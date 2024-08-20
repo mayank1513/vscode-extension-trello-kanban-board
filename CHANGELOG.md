@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.7.4
+
+### Patch Changes
+
+- e843082: Attempt to fix the trails pref
+
 ## 0.7.3
 
 ### Patch Changes
