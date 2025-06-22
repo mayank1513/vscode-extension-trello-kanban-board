@@ -1,7 +1,7 @@
 import { TaskType } from "@/interface";
 import { RefObject, useId, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import ReactMarkdown from "react-markdown";
+import { Md } from "@m2d/react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { useGlobalState } from "utils/context";
@@ -90,9 +90,9 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                 />
                 {!isEditing &&
                   (task.description.trim() ? (
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+                    <Md rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
                       {autoLinkMd(task.description.replace(/\n+/g, "\n\n"))}
-                    </ReactMarkdown>
+                    </Md>
                   ) : (
                     <p className={styles.placeholder}>Enter task description in Markdown format.</p>
                   ))}
