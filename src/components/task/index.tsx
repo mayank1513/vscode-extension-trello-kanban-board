@@ -42,6 +42,18 @@ export default function Task({ task, index }: { task: TaskType; index: number })
     setState({ ...state, tasks: { ...state.tasks } });
     setShowColorSelector(false);
   };
+
+  const setEditMode = () => {
+    setIsEditing(true);
+    if (textareaRef.current?.value) {
+      textareaRef.current.value = "hk";
+      textareaRef.current.value = task.description;
+    }
+    setTimeout(() => {
+      textareaRef.current && textareaRef.current.focus();
+      resizeTextArea(textareaRef);
+    }, 100);
+  };
   return (
     <>
       <Draggable draggableId={task.id} index={index}>
@@ -60,18 +72,7 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                   <button onClick={() => setShowColorSelector(true)}>
                     <Palette />
                   </button>
-                  <button
-                    onClick={() => {
-                      setIsEditing(true);
-                      if (textareaRef.current?.value) {
-                        textareaRef.current.value = "hk";
-                        textareaRef.current.value = task.description;
-                      }
-                      setTimeout(() => {
-                        textareaRef.current && textareaRef.current.focus();
-                        resizeTextArea(textareaRef);
-                      }, 100);
-                    }}>
+                  <button onClick={setEditMode}>
                     <Pencil />
                   </button>
                   <button className={styles.close} onClick={removeTask}>
@@ -93,9 +94,11 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                 />
                 {!isEditing &&
                   (task.description.trim() ? (
-                    <Md rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                      {autoLinkMd(task.description.replace(/\n+/g, "\n\n"))}
-                    </Md>
+                    <p onDoubleClick={setEditMode}>
+                      <Md rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+                        {autoLinkMd(task.description.replace(/\n+/g, "\n\n"))}
+                      </Md>
+                    </p>
                   ) : (
                     <p className={styles.placeholder}>Enter task description in Markdown format.</p>
                   ))}
