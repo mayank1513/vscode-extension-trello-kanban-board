@@ -9,6 +9,7 @@ import styles from "./task.module.scss";
 import { vscode } from "utils/vscode";
 import { ColorSelector } from "components/color-selector";
 import { autoLinkMd } from "react-markdown-autolink";
+import { Palette, Pencil, X } from "lucide-react";
 
 function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
   const target = textareaRef.current;
@@ -56,7 +57,9 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                 style={{ background: task.color }}>
                 <header {...provided.dragHandleProps}>
                   <span>∘∘∘</span>
-                  <button onClick={() => setShowColorSelector(true)}>🖌</button>
+                  <button onClick={() => setShowColorSelector(true)}>
+                    <Palette />
+                  </button>
                   <button
                     onClick={() => {
                       setIsEditing(true);
@@ -69,10 +72,10 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                         resizeTextArea(textareaRef);
                       }, 100);
                     }}>
-                    🖉
+                    <Pencil />
                   </button>
                   <button className={styles.close} onClick={removeTask}>
-                    ✖
+                    <X />
                   </button>
                 </header>
                 <textarea

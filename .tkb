@@ -1,11 +1,19 @@
 {
   "scope": "Workspace",
-  "tasks": {},
+  "tasks": {
+    "elDTJP5o1czlz5RSTfL2T": {
+      "id": "elDTJP5o1czlz5RSTfL2T",
+      "description": "",
+      "columnId": "column-todo"
+    }
+  },
   "columns": [
     {
       "id": "column-todo",
       "title": "To do",
-      "tasksIds": []
+      "tasksIds": [
+        "elDTJP5o1czlz5RSTfL2T"
+      ]
     },
     {
       "id": "column-doing",

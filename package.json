@@ -15,14 +15,15 @@
     "deploy": "npm run build:all && cd dist && vsce publish"
   },
   "dependencies": {
+    "@m2d/react-markdown": "0.2.0",
     "@mayank1513/fork-me": "^2.0.1",
+    "lucide-react": "^0.522.0",
     "nanoid": "^5.0.4",
     "nextjs-themes": "^2.1.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-color-palette": "^7.2.0",
     "react-dom": "^18.2.0",
-    "@m2d/react-markdown": "0.2.0",
     "react-markdown-autolink": "^0.0.0",
     "react-toastify": "^9.1.3",
     "react-webgl-trails": "^0.0.4",
