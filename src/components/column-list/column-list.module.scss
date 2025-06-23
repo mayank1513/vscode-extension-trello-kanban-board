@@ -26,11 +26,10 @@
   button {
     all: unset;
     display: none;
-    padding: 0 5px;
     cursor: pointer;
   }
   &:hover button {
-    display: inline-block;
+    display: block;
   }
   button:hover {
     color: orange;
@@ -38,6 +37,10 @@
 
   .close:hover {
     color: red;
+  }
+  svg {
+    padding: 5px;
+    display: block;
   }
 }
 .headerContent {

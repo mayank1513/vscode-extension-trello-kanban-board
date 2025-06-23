@@ -4,6 +4,7 @@ import styles from "./column-list.module.scss";
 import { useGlobalState } from "utils/context";
 import { vscode } from "utils/vscode";
 import { ColorSelector } from "components/color-selector";
+import { Palette, X } from "lucide-react";
 
 export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: ColumnType }) {
   const { state, setState } = useGlobalState();
@@ -48,9 +49,11 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
           <div hidden={isEditing} className={styles.headerContent}>
             {column.title || <span className={styles.placeholder}>Add column title</span>}
             <div className="grow"></div>
-            <button onClick={() => setShowColorSelector(true)}>🖌</button>
+            <button onClick={() => setShowColorSelector(true)}>
+              <Palette />
+            </button>
             <button className={styles.close} onClick={removeColumn}>
-              ✖
+              <X />
             </button>
           </div>
         </label>
