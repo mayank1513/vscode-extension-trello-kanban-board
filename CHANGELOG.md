@@ -1,5 +1,16 @@
 # Trello Kanban Board
 
+## 0.8.0
+
+### Minor Changes
+
+- d9f750b: Double click to edit task.
+
+### Patch Changes
+
+- f4edafb: Improve Icons with Lucid React
+- 8ca6793: Fix: Not able to save color - https://github.com/mayank1513/vscode-extension-trello-kanban-board/issues/52#issuecomment-2979171998
+
 ## 0.7.6
 
 ### Patch Changes
