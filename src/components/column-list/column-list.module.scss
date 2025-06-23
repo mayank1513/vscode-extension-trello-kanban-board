@@ -38,6 +38,12 @@
   .close:hover {
     color: red;
   }
+  .check {
+    display: block;
+    &:hover {
+      color: #0f0;
+    }
+  }
   svg {
     padding: 5px;
     display: block;

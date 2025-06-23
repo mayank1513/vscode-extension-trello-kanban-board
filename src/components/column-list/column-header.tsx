@@ -4,7 +4,7 @@ import styles from "./column-list.module.scss";
 import { useGlobalState } from "utils/context";
 import { vscode } from "utils/vscode";
 import { ColorSelector } from "components/color-selector";
-import { Palette, X } from "lucide-react";
+import { Check, Palette, Pencil, X } from "lucide-react";
 
 export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: ColumnType }) {
   const { state, setState } = useGlobalState();
@@ -36,24 +36,27 @@ export default function ColumnHeader(props: HTMLProps<HTMLElement> & { column: C
   return (
     <>
       <header {...rest} className={styles.header}>
-        <label htmlFor={id} onClick={() => setIsEditing(true)}>
-          <input
-            type="text"
-            id={id}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onBlur={onBlur}
-            placeholder="Add column title..."
-            hidden={!isEditing}
-          />
-          <div hidden={isEditing} className={styles.headerContent}>
-            {column.title || <span className={styles.placeholder}>Add column title</span>}
+        <label htmlFor={id} onDoubleClick={() => setIsEditing(true)}>
+          <div className={styles.headerContent}>
+            <input
+              type="text"
+              id={id}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              onBlur={onBlur}
+              placeholder="Add column title..."
+              hidden={!isEditing}
+            />
+            {isEditing ? null : column.title || <span className={styles.placeholder}>Add column title</span>}
             <div className="grow"></div>
+            <button onClick={() => setIsEditing(true)}>
+              <Pencil />
+            </button>
             <button onClick={() => setShowColorSelector(true)}>
               <Palette />
             </button>
-            <button className={styles.close} onClick={removeColumn}>
-              <X />
+            <button className={isEditing ? styles.check : styles.close} onClick={isEditing ? onBlur : removeColumn}>
+              {isEditing ? <Check /> : <X />}
             </button>
           </div>
         </label>

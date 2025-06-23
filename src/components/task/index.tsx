@@ -69,11 +69,11 @@ export default function Task({ task, index }: { task: TaskType; index: number })
                 style={{ background: task.color }}>
                 <header {...provided.dragHandleProps}>
                   <span>∘∘∘</span>
-                  <button onClick={() => setShowColorSelector(true)}>
-                    <Palette />
-                  </button>
                   <button onClick={setEditMode}>
                     <Pencil />
+                  </button>
+                  <button onClick={() => setShowColorSelector(true)}>
+                    <Palette />
                   </button>
                   <button
                     className={isEditing ? styles.check : styles.close}
