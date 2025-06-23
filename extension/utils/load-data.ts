@@ -15,6 +15,7 @@ function parseTasks(data: BoardType, parsedData: BoardType) {
         id: data.tasks[key].id,
         description: data.tasks[key].description,
         columnId: data.tasks[key].columnId,
+        color: data.tasks[key].color,
       };
     });
   } else {
@@ -31,6 +32,7 @@ function parseColumns(data: BoardType, parsedData: BoardType) {
       if (typeof col.title !== "string") throw new Error();
       parsedCol.id = col.id;
       parsedCol.title = col.title;
+      parsedCol.color = col.color;
       if (Array.isArray(col.tasksIds)) {
         parsedCol.tasksIds = [];
         col.tasksIds.forEach((tId: string) => {
