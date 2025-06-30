@@ -21,7 +21,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ state, setState }}>
-      <ThemeSwitcher storage="localStorage" themeTransition="all .3s" />
+      <ThemeSwitcher themeTransition="all .3s" />
       <Board />
       <ToastContainer position="bottom-right" />
     </GlobalContext.Provider>

@@ -11,7 +11,7 @@ import { ColorSelector } from "components/color-selector";
 import { autoLinkMd } from "react-markdown-autolink";
 import { Check, Palette, Pencil, X } from "lucide-react";
 
-function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement>) {
+function resizeTextArea(textareaRef: RefObject<HTMLTextAreaElement | null>) {
   const target = textareaRef.current;
   if (!target) return;
   target.style.height = "auto";
