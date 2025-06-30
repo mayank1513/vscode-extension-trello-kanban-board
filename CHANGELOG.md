@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.8.1
+
+### Patch Changes
+
+- 529f7ee: update dependencies and fix TypeScript
+
 ## 0.8.0
 
 ### Minor Changes
