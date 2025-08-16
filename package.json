@@ -32,7 +32,7 @@
     "webgl-generative-particles": "^0.0.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.5",
+    "@changesets/cli": "^2.29.6",
     "@testing-library/jest-dom": "^6.7.0",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.3.0",
