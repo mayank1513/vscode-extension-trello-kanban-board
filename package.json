@@ -51,7 +51,7 @@
     "eslint-plugin-react-refresh": "^0.4.21",
     "jsdom": "^27.0.0",
     "octokit": "^5.0.3",
-    "sass": "^1.93.1",
+    "sass": "^1.93.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",
