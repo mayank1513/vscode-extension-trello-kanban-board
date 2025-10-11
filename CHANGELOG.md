@@ -1,5 +1,11 @@
 # Trello Kanban Board
 
+## 0.8.2
+
+### Patch Changes
+
+- b9dda60: fix: should not open color picker on task creation
+
 ## 0.8.1
 
 ### Patch Changes
